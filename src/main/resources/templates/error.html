@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page for error</title>
+</head>
+<body>
+<p th:text="${access}"></p>
+<h3 th:if="${message != null}" th:utext="${message}" style="color: red;"></h3>
+
+<div th:if="${userDto != null}" th:utext="${userDto.userName}"></div>
+</body>
+</html>
