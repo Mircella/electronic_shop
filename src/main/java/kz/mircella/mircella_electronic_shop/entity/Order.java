@@ -104,7 +104,7 @@ public class Order implements Serializable {
     public String toString() {
         return "Order{" +
                 ", orderDate=" + orderDate +
-                ", user=" + user.getName() +
+                ", user=" + user.getUsername() +
                 ", product=" + product.getTitle() +
                 ", count=" + count +
                 '}';

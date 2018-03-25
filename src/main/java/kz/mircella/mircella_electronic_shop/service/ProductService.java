@@ -15,6 +15,7 @@ public interface ProductService {
     List<Product> getProductsByProductCategory(ProductCategory productCategory);
 
     Product getProductById(long id);
+    Product getProductByIdWithFeedbacks(long id);
     void deleteProductById(long id);
     Product saveProduct(Product product);
 }

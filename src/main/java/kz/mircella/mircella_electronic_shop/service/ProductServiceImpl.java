@@ -1,14 +1,18 @@
 package kz.mircella.mircella_electronic_shop.service;
 
+import kz.mircella.mircella_electronic_shop.entity.Feedback;
 import kz.mircella.mircella_electronic_shop.entity.Product;
 import kz.mircella.mircella_electronic_shop.entity.ProductCategory;
 import kz.mircella.mircella_electronic_shop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
+@Transactional
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
@@ -31,6 +35,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(long id) {
         return productRepository.findById(id).get();
+    }
+
+    @Override
+    public Product getProductByIdWithFeedbacks(long id) {
+        Product product = productRepository.findById(id).get();
+        Set<Feedback>feedbacks = product.getFeedbacks();
+        product.setFeedbacks(feedbacks);
+        return product;
     }
 
     @Override

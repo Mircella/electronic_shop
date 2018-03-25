@@ -18,13 +18,13 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name", nullable = false, length = 100)
-    private String name;
+    @Column(name = "username", nullable = false, length = 100)
+    private String username;
 
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "password", nullable = false, length = 12)
+    @Column(name = "password", nullable = false, length = 100)
     private String password;
 
     @Column(name = "card", nullable = false, length = 10, unique = true)
@@ -43,8 +43,8 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String name, String email, String password, Long card, RoleEnum role) {
-        this.name = name;
+    public User(String username, String email, String password, Long card, RoleEnum role) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.card = card;
@@ -52,7 +52,7 @@ public class User implements Serializable {
     }
 
     public User(String name, String email, String password, Long card, RoleEnum role, Set<Order> orders, Set<Feedback> feedbacks) {
-        this.name = name;
+        this.username = name;
         this.email = email;
         this.password = password;
         this.card = card;
@@ -65,12 +65,12 @@ public class User implements Serializable {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -131,20 +131,20 @@ public class User implements Serializable {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(getName(), user.getName()) &&
+        return Objects.equals(getUsername(), user.getUsername()) &&
                 Objects.equals(getCard(), user.getCard());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getCard());
+        return Objects.hash(getUsername(), getCard());
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", card=" + card +

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Category page</title>
+    <title th:text="#{site_title}"></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -46,7 +46,8 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a th:href="@{/sign_up}"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-                    <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                    <li><a th:if="${#request.userPrincipal!=null}" th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                    <li><a th:if="${#request.userPrincipal==null}" th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
                 </ul>
             </div>
         </div>
@@ -56,7 +57,7 @@
 <div class="container demo">
     <ul class="breadcrumb">
         <li><a th:href="@{/}">Home</a></li>
-        <li class="active">Product</li>
+        <li class="active">Products in this category</li>
     </ul>
     <h2 th:text="${category}"></h2>
     <div class="main clearfix" th:each="product:${products}">

@@ -70,4 +70,10 @@ public class CatalogController {
         return "promotions";
     }
 
+    @GetMapping(value = "/reviews")
+    public String reviewPage(Model model) {
+        model.addAttribute("review", "Review");
+        return "reviews";
+    }
+
 }

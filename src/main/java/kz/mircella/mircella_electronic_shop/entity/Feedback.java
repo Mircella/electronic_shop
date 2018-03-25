@@ -32,6 +32,10 @@ public class Feedback implements Serializable{
     @JoinColumn(name="user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity =Product.class,cascade = CascadeType.ALL)
+    @JoinColumn(name="product_id", nullable = false, referencedColumnName = "id")
+    private Product product;
+
     public Feedback() {
     }
 
@@ -72,6 +76,14 @@ public class Feedback implements Serializable{
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     @Override

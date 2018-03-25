@@ -33,7 +33,7 @@ public class UserPageController {
     @PostMapping(value = "/sign_up")
     public ModelAndView productSearch(@Valid @ModelAttribute("user") User user) {
         ModelAndView model = new ModelAndView("redirect:/");
-        String name = user.getName();
+        String name = user.getUsername();
         String email = user.getEmail();
         String password = user.getPassword();
         Long card = user.getCard();
@@ -57,10 +57,6 @@ public class UserPageController {
                         ((Authentication) principal).getPrincipal();
         String username = loginedUser.getUsername();
         User user = userService.getUserByName(username);
-//        String password = user.getPassword();
-//        Long card = user.getCard();
-//        RoleEnum role = user.getRole();
-//        String email = user.getEmail();
         UserDto userDto = userMapper.mapAppUserToUserUserDto(user);
         model.addAttribute("userDto",userDto);
         return "user";
@@ -68,7 +64,7 @@ public class UserPageController {
 
     @GetMapping(value = "/logout-successful")
     public String logout(Model model){
-        return "index";
+        return "redirect:/";
     }
 
     @GetMapping(value = "/denied")

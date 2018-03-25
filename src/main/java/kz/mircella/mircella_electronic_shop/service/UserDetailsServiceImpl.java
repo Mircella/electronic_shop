@@ -8,11 +8,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserServiceImpl userService;
@@ -20,10 +22,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         User user = userService.getUserByNameWithEncrytedPassword(name);
-        if(user==null){
-            throw new RuntimeException("Not found user with name "+name);
+        if (user == null) {
+            throw new RuntimeException("Not found user with name " + name);
         }
-        String userName = user.getName();
+        String userName = user.getUsername();
         String password = user.getPassword();
         String roleName = userService.getUserRole(name);
         List<GrantedAuthority> authorityList = new ArrayList<>();

@@ -2,12 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title th:text="#{site_title}"></title>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" th:href="@{resources/css/product.css}">
+    <link rel="stylesheet" th:href="@{resources/css/index.css}">
+    <script th:src="@{resources/js/index.js}"></script>
 </head>
 <body>
 <header>
@@ -37,7 +38,8 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a th:href="@{/}">Home</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" roleEnum="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" roleEnum="button"
+                           aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a th:href="@{/promotions}">Our promotions</a></li>
                             <li><a th:href="@{/reviews}">Reviews</a></li>
@@ -46,34 +48,38 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a th:href="@{/sign_up}"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-                    <li><a th:if="${#request.userPrincipal!=null}" th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-                    <li><a th:if="${#request.userPrincipal==null}" th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                    <li><a th:if="${#request.userPrincipal!=null}" th:href="@{/logout}"><span
+                            class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                    <li><a th:if="${#request.userPrincipal==null}" th:href="@{/login}"><span
+                            class="glyphicon glyphicon-log-in"></span>Login</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
-
 <div class="container demo">
     <ul class="breadcrumb">
         <li><a th:href="@{/}">Home</a></li>
-        <li class="active">Search results</li>
+        <li class="active">View your product cart</li>
     </ul>
-    <div class="main clearfix" th:each="product:${products}">
+    <div class="main clearfix">
         <div class="img">
-            <picture>
-                <source th:src="@{${'/resources/images/index/products/'+product.path}}" media="(max-width: 500px)">
-                <img th:src="@{${'/resources/images/index/products/'+product.path}}" alt="product">
-            </picture>
+            <!--<picture>-->
+                <!--<source th:src="@{${'/resources/images/index/products/'+product.path}}" media="(max-width: 500px)">-->
+                <!--<img th:src="@{${'/resources/images/index/products/'+product.path}}" alt="product_picture">-->
+            <!--</picture>-->
         </div>
         <div class="description">
             <div class="des">
-                <h4 th:text="${product.title}"></h4>
-                <p th:text="${product.description}"></p>
+                <!--<h1 th:utext="${product.title}"></h1>-->
+                <!--<p>Status:-->
+                    <!--<span th:if="${product.count>0}">In stock</span>-->
+                    <!--<span th:if="${product.count<=0}">No stock</span>-->
+                <!--</p>-->
             </div>
-
             <div class="price">
-                <h6 th:text="${product.price}"></h6>
+                <!--<h2>Our price: <span th:text="${product.price}"></span></h2>-->
+                <a th:href="@{/buy}"><img th:src="@{/resources/images/product/addtocart.png}" alt="add cart"></a>
             </div>
         </div>
     </div>

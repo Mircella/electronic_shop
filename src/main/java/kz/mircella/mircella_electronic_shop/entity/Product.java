@@ -19,7 +19,7 @@ public class Product implements Serializable {
     @Column(name = "title", length = 100, nullable = false)
     private String title;
 
-    @Column(name = "description", length = 1000)
+    @Column(name = "description", length = 10000)
     private String description;
 
     @Column(name = "path",nullable = false)
@@ -37,6 +37,9 @@ public class Product implements Serializable {
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, targetEntity = Order.class,cascade = CascadeType.ALL)
     private Set<Order> orders = new HashSet<Order>();
+
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, targetEntity = Feedback.class, cascade = CascadeType.ALL)
+    private Set<Feedback> feedbacks = new HashSet<>();
 
     public Product() {
     }
@@ -120,6 +123,14 @@ public class Product implements Serializable {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public Set<Feedback> getFeedbacks() {
+        return feedbacks;
+    }
+
+    public void setFeedbacks(Set<Feedback> feedbacks) {
+        this.feedbacks = feedbacks;
     }
 
     @Override

@@ -47,7 +47,8 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a th:href="@{/sign_up}"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-                    <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                    <li><a th:if="${#request.userPrincipal!=null}" th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                    <li><a th:if="${#request.userPrincipal==null}" th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
                 </ul>
             </div>
         </div>
@@ -171,7 +172,7 @@
                                     </a>
                                     <div class="desc" th:text="${product.price}"></div>
                                     <div class="des">
-                                        <h2 th:text="${product.title}"></h2>
+                                        <h5 th:utext="${product.title}"></h5>
                                     </div>
                                 </div>
 
@@ -181,7 +182,7 @@
                                     </a>
                                     <div class="desc" th:text="${product.price}"></div>
                                     <div class="des">
-                                        <h2 th:text="${product.title}"></h2>
+                                        <h5 th:utext="${product.title}"></h5>
                                     </div>
                                 </div>
 
@@ -195,7 +196,7 @@
                                     </a>
                                     <div class="desc" th:text="${product.price}"></div>
                                     <div class="des">
-                                        <h2 th:text="${product.title}"></h2>
+                                        <h5 th:utext="${product.title}"></h5>
                                     </div>
                                 </div>
 
@@ -205,7 +206,7 @@
                                     </a>
                                     <div class="desc" th:text="${product.price}"></div>
                                     <div class="des">
-                                        <h2 th:text="${product.title}"></h2>
+                                        <h5 th:utext="${product.title}"></h5>
                                     </div>
                                 </div>
 
@@ -220,7 +221,7 @@
                                 </a>
                                 <div class="desc" th:text="${product.price}"></div>
                                 <div class="des">
-                                    <h2 th:text="${product.title}"></h2>
+                                    <h5 th:utext="${product.title}"></h5>
                                 </div>
                             </div>
 

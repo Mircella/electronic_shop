@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Product</title>
+    <title th:text="#{site_title}"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -48,7 +47,8 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a th:href="@{/sign_up}"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-                    <li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
+                    <li><a th:if="${#request.userPrincipal!=null}" th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
+                    <li><a th:if="${#request.userPrincipal==null}" th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
                 </ul>
             </div>
         </div>
@@ -67,13 +67,16 @@
             </picture>
         </div>
         <div class="description">
-            <div class="des">
-                <h1 th:text="${product.title}"></h1>
-                <p th:text="${product.description}"></p>
+            <div class="des" th:if="${product!=null}">
+                <h1 th:utext="${product.title}"></h1>
+                <p>Status:
+                    <span th:if="${product.count>0}">In stock</span>
+                    <span th:if="${product.count<=0}">No stock</span>
+                </p>
             </div>
-            <div class="price">
+            <div class="price" th:if="${product!=null}">
                 <h2>Our price: <span th:text="${product.price}"></span></h2>
-                <a href="#"><img th:src="@{/resources/images/product/addtocart.png}" alt="add cart"></a>
+                <a th:href="@{/cart}"><img th:src="@{/resources/images/product/addtocart.png}" alt="add cart"></a>
             </div>
         </div>
     </div>
@@ -89,48 +92,25 @@
             </ul>
 
             <!-- Вкладки панелей -->
-            <div class="tab-content clearfix">
+            <div class="tab-content clearfix" th:if="${product!=null}">
                 <div roleEnum="tabpanel" class="tab-pane active" id="home">
-                    <p class="demo_1">5.8-inch Super Retina HD display with HDR and True Tone<br/>
-
-                        All-glass and stainless steel design, water and dust resistant<br/>
-
-                        12MP dual cameras with dual IOS, Portrait mode, Portrait lighting, and 4K video up to 60 fps<br/>
-
-                        7MP TrueDepth front camera with Portrait mode, Portrait Lighting<br/>
-
-                        Face ID for secure authentication and Apple Pay<br/>
-
-                        A11 Bionic, the most powerful and smartest chip in a smartphone<br/>
-
-                        Wireless charging - works with Qi chargers<br/>
-
-                        The iPhone X display has rounded corners. When measured as a rectangle, the screen is 5.85 inches diagonally. Actual viewing area is less<br/>
-
-                        Charging mat sold separately<br/>
-
-                        iPhone X is splash, water, and dust resistant and was tested under controlled laboratory conditions with a rating of IP67 under IEC standard 60529<br/>
-
-                        Splash, water, and dust resistance are not permanent conditions and resistance might decrease as a result of normal wear<br/>
-
-                        Do not attempt to charge a wet iPhone; refer to the user guide for cleaning and drying instructions. Liquid damage not covered under warranty<br/>
-
-                        Portrait Lighting available in beta</p>
+                    <p class="demo_1" th:utext="${product.description}"></p>
                 </div>
 
                 <div role="tabpanel" class="tab-pane" id="profile">
-                    <div th:if="${text==null}">
+                    <div th:if="${feedbacks==null}">
                         <div class="des">
                             <h4>There are no feedbacks about the product. Be first!</h4>
                         </div>
                     </div>
-                    <div th:if="${text != null}">
+                    <div th:if="${feedbacks != null}">
                         <div class="des">
                             <h4>Here you can leave your feedback about the product!</h4>
                         </div>
                     </div>
                     <div class="clearfix">
-                        <form class="navbar-form navbar-left" method="post" action="" th:action="@{${'/feedback/'+product.id}}">
+                        <form class="navbar-form navbar-left" method="post" action=""
+                              th:action="@{${'/feedback/'+product.id}}">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Feedback text" name="text">
                                 <div class="input-group-btn">
@@ -141,9 +121,14 @@
                             </div>
                         </form>
                     </div>
-                    <div class="description" th:if="${text != null}">
-                        <div class="des">
-                            <p th:text="${text}"></p>
+                    <div class="description" th:if="${feedbacks != null}">
+                        <div class="des" th:each="feedback:${feedbacks}">
+                            <div class="feedback">
+                                <p th:text="${feedback.text}"></p>
+                                <p>Posted by: <span th:text="${feedback.user.username}"></span></p>
+                                <p>Date: <span th:text="${feedback.date}"></span></p>
+                                <hr/>
+                            </div>
                         </div>
                     </div>
                 </div>

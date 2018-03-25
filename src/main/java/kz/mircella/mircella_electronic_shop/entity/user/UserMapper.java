@@ -13,7 +13,7 @@ public class UserMapper {
     public UserDto mapAppUserToUserUserDto(User user){
         return UserDto
                 .builder()
-                .userName(user.getName())
+                .userName(user.getUsername())
                 .userEmail(user.getEmail())
                 .userPassword(user.getPassword())
                 .userCard(user.getCard())
