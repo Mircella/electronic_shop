@@ -1,7 +1,7 @@
 body{
     padding: 0px;
     margin: 0px;
-    
+
 }
 
 .main{
@@ -41,7 +41,7 @@ padding: 30px;
 div.gallery {
     margin: 28px;
     margin-top: 25px;
-    
+
     float: left;
     width: 110px;
 }
@@ -67,7 +67,7 @@ div.desc {
     padding: 0px;
     margin-top: 0px;
     color: #e3484b;
-    
+
 }
 
 /*--------------------------------------------*/
