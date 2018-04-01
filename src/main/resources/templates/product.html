@@ -1,26 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
     <title th:text="#{site_title}"></title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{resources/css/product.css}">
-    <meta name="description" content="Book Shop">
-    <meta name="keywords" content="Book, Shop, Book shop, Buy book, Free Book">
-    <meta name="author" content="Nassipolla Adil">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+
+    <link rel="stylesheet" th:href="@{resources/css/index.css}">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- Icons -->
-    <link href="open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
     <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto+Slab}" rel="stylesheet">
+    <!-- Icons -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css}"
+          rel="stylesheet">
+
+    <!-- Latest compiled JavaScript -->
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+    <!-- jQuery library -->
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
     <!-- Google translate -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -30,53 +28,10 @@
         }
 
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
-<header>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header ">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" th:href="@{/}" th:text="#{site_title}"></a>
-            </div>
-
-            <form class="navbar-form navbar-left" method="post" action="" th:action="@{/search}">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="title">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a th:href="@{/}">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" roleEnum="button"
-                           aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/promotions}">Our promotions</a></li>
-                            <li><a th:href="@{/reviews}">Reviews</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a th:href="@{/sign_up}"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-                    <li><a th:if="${#request.userPrincipal!=null}" th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-                    <li><a th:if="${#request.userPrincipal==null}" th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</header>
 <div class="container demo">
     <ul class="breadcrumb">
         <li><a th:href="@{/}">Home</a></li>
@@ -117,9 +72,6 @@
             <div class="tab-content clearfix" th:if="${product!=null}">
                 <div roleEnum="tabpanel" class="tab-pane active" id="home">
                     <p class="demo_1" th:utext="${product.description}"></p>
-                </div>
-
-                <div role="tabpanel" class="tab-pane" id="profile">
                     <div th:if="${feedbacks==null}">
                         <div class="des">
                             <h4>There are no feedbacks about the product. Be first!</h4>
@@ -130,19 +82,18 @@
                             <h4>Here you can leave your feedback about the product!</h4>
                         </div>
                     </div>
-                    <div class="clearfix">
+                    <div class="clearfix" th:if="${#request.userPrincipal!=null}">
                         <form class="navbar-form navbar-left" method="post" action=""
-                              th:action="@{${'/feedback/'+product.id}}">
+                              th:action="@{${'/product/'+product.id}}">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Feedback text" name="text">
                                 <div class="input-group-btn">
-                                    <button class="btn btn-default">
-                                        <i class="glyphicon glyphicon-search"></i>
-                                    </button>
+                                    <button>Send</button>
                                 </div>
                             </div>
                         </form>
                     </div>
+                    <div class="clearfix" th:if="${#request.userPrincipal==null}">You have no rights to leave a feedback</div>
                     <div class="description" th:if="${feedbacks != null}">
                         <div class="des" th:each="feedback:${feedbacks}">
                             <div class="feedback">
@@ -155,7 +106,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="undercolumn inline">
@@ -188,37 +138,6 @@
                         <p class="text_1">$50</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-<div class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-3">
-                <ul class="list-unstyled">
-                    <li>How to buy the product?
-                    <li>
-                    <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Payment</a></li>
-                    <li><a href="#">Conditions of return</a></li>
-                </ul>
-            </div>
-            <div class="col-xs-3">
-                <ul class="list-unstyled">
-                    <li>Contacts
-                    <li>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Technical support</a></li>
-                </ul>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-xs-4">
-                <p class="text-muted pull-right">© 2018 Electronic shop. All rights reserved</p>
             </div>
         </div>
     </div>

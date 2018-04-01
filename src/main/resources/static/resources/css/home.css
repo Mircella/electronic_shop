@@ -23,7 +23,6 @@ body {
     font-weight: bold;
 }
 
-
 .red_logo {
     color: red;
 }
@@ -63,7 +62,6 @@ body {
     padding: .5rem;
 }
 
-
 .right_nav ul li a:hover {
     background-color: #555;
     color: white;
@@ -85,7 +83,6 @@ body > div:nth-child(3) > div > div.col-md-3 > div {
 }
 
 #div1 {
-
     display: none;
 }
 
@@ -195,8 +192,6 @@ body > div:nth-child(3) > div > div.col-md-9 {
     margin-bottom: 100px;
 }
 
-
-
 /*----- Footer ------------------------*/
 
 footer {
@@ -249,6 +244,7 @@ footer a:hover {
     .list_collapse {
         display: none;
     }
+
     .collapse-left-card {
         display: none;
     }

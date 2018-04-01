@@ -8,27 +8,25 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerA
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.time.Month;
 
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = { //
-		DataSourceAutoConfiguration.class, //
-		DataSourceTransactionManagerAutoConfiguration.class, //
-		HibernateJpaAutoConfiguration.class })
+        DataSourceAutoConfiguration.class, //
+        DataSourceTransactionManagerAutoConfiguration.class, //
+        HibernateJpaAutoConfiguration.class})
 @EnableWebMvc
-public class MircellaElectronicShopApplication extends SpringBootServletInitializer{
+@EnableJpaRepositories
+public class MircellaElectronicShopApplication extends SpringBootServletInitializer {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MircellaElectronicShopApplication.class, args).registerShutdownHook();
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MircellaElectronicShopApplication.class, args).registerShutdownHook();
+    }
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		return builder.sources(MircellaElectronicShopApplication.class);
-	}
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+        return builder.sources(MircellaElectronicShopApplication.class);
+    }
 
 }

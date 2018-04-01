@@ -1,7 +1,6 @@
 package kz.mircella.mircella_electronic_shop.config;
 
-import kz.mircella.mircella_electronic_shop.service.UserDetailsServiceImpl;
-import kz.mircella.mircella_electronic_shop.util.EncrytedPasswordUtil;
+import kz.mircella.mircella_electronic_shop.user.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
