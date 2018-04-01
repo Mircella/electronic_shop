@@ -1,8 +1,5 @@
-function myFunction() {
-    var x = document.getElementById("div1");
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    } else {
-        x.style.display = "none";
-    }
-}
+                    $(document).ready(function init() {
+                        $(".listgroup").click(function () {
+                            $("#div1").toggle(1000);
+                        });
+                    });
