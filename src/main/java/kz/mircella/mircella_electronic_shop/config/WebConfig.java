@@ -7,25 +7,25 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 import org.thymeleaf.spring5.SpringTemplateEngine;
-import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import java.util.Locale;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan("kz.mircella.mircella_electronic_shop")
+@EnableJpaRepositories(basePackages = "kz.mircella.mircella_electronic_shop")
+@EnableTransactionManagement
 public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
 
     private ApplicationContext applicationContext;
@@ -47,7 +47,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
     }
 
     @Bean
-    public ViewResolver viewResolver(){
+    public ViewResolver viewResolver() {
         ThymeleafViewResolver thymeleafViewResolver = new ThymeleafViewResolver();
         thymeleafViewResolver.setTemplateEngine(templateEngine());
         thymeleafViewResolver.setCharacterEncoding("UTF-8");
@@ -56,7 +56,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
     }
 
     @Bean
-    public SpringTemplateEngine templateEngine(){
+    public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine springTemplateEngine = new SpringTemplateEngine();
         springTemplateEngine.setEnableSpringELCompiler(true);
         springTemplateEngine.setTemplateResolver(templateResolver());
@@ -65,7 +65,7 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
     }
 
     @Bean
-    public ClassLoaderTemplateResolver templateResolver(){
+    public ClassLoaderTemplateResolver templateResolver() {
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setPrefix("templates/");
         templateResolver.setCacheable(false);
@@ -85,8 +85,8 @@ public class WebConfig implements WebMvcConfigurer, ApplicationContextAware {
         return messageSource;
     }
 
-    @Bean(name="localeResolver")
-    public LocaleResolver localeResolver(){
+    @Bean(name = "localeResolver")
+    public LocaleResolver localeResolver() {
         SessionLocaleResolver resolver = new SessionLocaleResolver();
         resolver.setDefaultLocale(new Locale("en"));
         return resolver;

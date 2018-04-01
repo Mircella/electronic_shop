@@ -5,32 +5,35 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="stylesheet" th:href="@{/resources/css/home.css}">
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- Icons -->
-
-    <link href="open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
     <!-- Google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto+Slab}" rel="stylesheet">
+    <!-- Icons -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css}"
+          rel="stylesheet">
+
+    <script type="text/javascript" th:src="@{/resources/js/index.js}"/>
+    <!-- Latest compiled JavaScript -->
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+    <!-- jQuery library -->
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+
+    <!-- Google map -->
+    <script async defer
+            th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyDvpKC_BACdStnyLnLFMtlESn2eUdJm-lI&callback=initMap}"/>
+    <!--<link href="open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">-->
     <!-- Google translate -->
+    <script type="text/javascript"
+            th:src="@{//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit}"></script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
                 pageLanguage: 'en'
             }, 'google_translate_element');
         }
-
     </script>
-    <script type="text/javascript"
-            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <link rel="stylesheet" th:href="@{resources/css/home.css}">
-    <script th:src="@{resources/js/index.js}"/>
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvpKC_BACdStnyLnLFMtlESn2eUdJm-lI&callback=initMap"/>
 </head>
 <body>
 
@@ -39,61 +42,6 @@
         <span>Electronic</span><span class="red_logo">Shop</span>
     </div>
 </div>
-
-<header>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div class="nav_bar">
-            <a class="navbar-brand" href="../home.html">Max Shop</a>
-        </div>
-        <div class="nav_toggle">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button></div>
-        <div class="container">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            More
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="media/media.html">Media</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="map/map.html">Map</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">About us</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Categories
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Popular</a>
-
-                            <a class="dropdown-item" href="#">Bestsellers</a>
-
-                            <a class="dropdown-item" href="#">Cooming Soon</a>
-                        </div>
-                    </li>
-                    <form class="form-inline">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                </ul>
-                <div class="right_nav">
-                    <ul>
-                        <li><a href="registration/sign_up.html"><span class="oi oi-person"></span> Log in / Sign up</a></li>
-
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-</header>
-
 <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="nav_bar">
@@ -112,8 +60,13 @@
                         <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle"
+                           href="#"
+                           id="navbarDropdown"
+                           role="button"
+                           data-toggle="dropdown"
+                           aria-haspopup="true"
+                           aria-expanded="false">
                             More
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -124,26 +77,19 @@
                             <a class="dropdown-item" th:href="@{/promotions}">Promotions</a>
                         </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Categories
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Popular</a>
-
-                            <a class="dropdown-item" href="#">Bestsellers</a>
-
-                            <a class="dropdown-item" href="#">Cooming Soon</a>
-                        </div>
-                    </li>
                     <form class="form-inline">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </ul>
                 <div class="right_nav">
                     <ul>
-                        <li><a href="registration/sign_up.html"><span class="oi oi-person"></span> Log in / Sign up</a>
+                        <li>
+                            <a th:if="${#request.userPrincipal==null}" th:href="@{/login}"><span
+                                    class="oi oi-person"></span>Log in / Sign up</a>
+                        </li>
+                        <li>
+                            <a th:if="${#request.userPrincipal!=null}" th:href="@{/logout}"><span
+                                    class="glyphicon glyphicon-log-out"></span>Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -156,7 +102,9 @@
         <div class="col-md-3">
             <div class="list_collapse">
                 <div class="list-group">
-                    <li class="list-group-item zxc"><span class="oi oi-list"></span> Categories</li>
+                    <li class="list-group-item zxc">
+                        <span class="oi oi-list"></span>Categories
+                    </li>
                     <a th:each="category:${categories}"
                        th:href="@{${'/catalog/'+category.id}}"
                        class="list-group-item"
@@ -166,31 +114,6 @@
                     </a>
                 </div>
             </div>
-            <!--- List group for screen less 768 px --->
-            <script>
-                $(document).ready(function () {
-                    $(".listgroup").click(function () {
-                        $("#div1").toggle(1000);
-                    });
-                });
-
-            </script>
-
-
-            <div class="collapse-list">
-                <button class="listgroup"><span class="oi oi-list"></span> Categories</button>
-
-                <div id="div1">
-                    <a th:each="category:${categories}"
-                       th:href="@{${'/catalog/'+category.id}}"
-                       class="list-group-item"
-                       th:text="${category.title}">
-                        <span th:if="${category.id == 1}" class="badge badge-primary badge-pill">2</span>
-                        <span th:if="${category.id == 3}" class="badge badge-secondary">New</span>
-                    </a>
-                </div>
-            </div>
-            <!---------------------------------------------------------------------->
         </div>
 
         <div class="col-md-9">
@@ -199,24 +122,38 @@
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <img class="d-block w-100" th:src="@{/resources/images/index/1.jpg}" alt="First slide">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>New Collection</h5>
+                            <h5>Promotion 1</h5>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img class="d-block w-100" th:src="@{/resources/images/index/2.jpg}" alt="Second slide">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>New Collection</h5>
+                            <h5>Promotion 2</h5>
                         </div>
                     </div>
                     <div class="carousel-item">
                         <img class="d-block w-100" th:src="@{/resources/images/index/3.jpg}" alt="Third slide">
                         <div class="carousel-caption d-none d-md-block">
-                            <h5>New Collection</h5>
+                            <h5>Promotion 3</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" th:src="@{/resources/images/index/4.jpg}" alt="Second slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Promotion 4</h5>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img class="d-block w-100" th:src="@{/resources/images/index/5.jpg}" alt="Second slide">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Promotion 5</h5>
                         </div>
                     </div>
                 </div>
@@ -231,8 +168,6 @@
             </div>
         </div>
     </div>
-
-
     <div class="row">
         <div class="col-md-3">
             <div class="collapse-left-card">
@@ -355,7 +290,7 @@
                 </script>
 
                 <script async defer
-                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvpKC_BACdStnyLnLFMtlESn2eUdJm-lI&callback=initMap">
+                        th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyDvpKC_BACdStnyLnLFMtlESn2eUdJm-lI&callback=initMap}">
 
 
                 </script>
