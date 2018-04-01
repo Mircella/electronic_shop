@@ -1,0 +1,284 @@
+body {
+    font-family: 'Roboto Slab', serif;
+    background: #fdfcfb;
+    font-weight: normal;
+}
+
+.selector-for-some-widget {
+    box-sizing: content-box;
+}
+
+/*--- Logo -----------------------*/
+
+.logo {
+    width: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    font-size: 30px;
+
+}
+
+.logo_center {
+    font-weight: bold;
+}
+
+
+.red_logo {
+    color: red;
+}
+
+/*-------------------------------*/
+
+/* Left Navbar ------------------*/
+
+#navbarSupportedContent a:hover {
+    background-color: #555;
+    color: white;
+}
+
+.nav_toggle {
+    float: right;
+}
+
+/*------------------------------*/
+
+/* Right Navbar */
+
+.right_nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+
+}
+
+.right_nav ul li {
+    display: inline;
+}
+
+.right_nav ul li a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, .5);
+    padding: .5rem;
+}
+
+
+.right_nav ul li a:hover {
+    background-color: #555;
+    color: white;
+}
+
+/*---------------------------------*/
+
+/*-- Main -------------------------*/
+
+body > div:nth-child(3) > div > div.col-md-3 > div {
+    margin-top: 15px;
+}
+
+.zxc {
+    background-color: red !important;
+    border-color: red !important;
+    color: white;
+    cursor: context-menu;
+}
+
+#div1 {
+
+    display: none;
+}
+
+.listgroup {
+    width: 100%;
+    text-align: left;
+    background-color: red;
+    border-color: red;
+    color: white;
+    border-radius: .25rem;
+    padding: .75rem 1.25rem;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+body > div:nth-child(3) > div:nth-child(1) > div.col-md-3 > div.list_collapse > div > a:nth-child(6) > span {
+    background-color: #007bff;
+}
+
+#div1 > a:nth-child(5) > span {
+    background-color: #007bff;
+}
+
+body > div:nth-child(3) > div > div.col-md-9 {
+    margin-top: 15px;
+    height: auto;
+}
+
+#carouselExampleIndicators > a.carousel-control-prev > span.carousel-control-prev-icon {
+    background-color: #555;
+    padding: 20px;
+}
+
+#carouselExampleIndicators > a.carousel-control-next > span.carousel-control-next-icon {
+    background-color: #555;
+    padding: 20px;
+}
+
+.carousel-indicators li {
+    border-radius: 12px !important;
+    width: 12px !important;
+    height: 12px !important;
+    background-color: #404040 !important;
+}
+
+.carousel-indicators .active{
+    background-color: white !important;
+}
+
+/*-----------------------------------------*/
+
+/*--- Lower main --------------------------*/
+
+#nav-home-tab {
+    background-color: red;
+    border: red;
+    color: white;
+    cursor: context-menu;
+}
+
+.nav-tabs .nav-item {
+    margin-bottom: 0px !important;
+}
+
+.nav-tabs {
+    border-bottom: solid 2px red !important;
+}
+
+.card-row {
+    float: left;
+    margin-top: 10px;
+    padding-left: 25px !important;
+}
+
+.card-row img {
+    box-shadow: 0 0 5px rgba(0, 0, 0, .19);
+    transition: all .5s;
+}
+
+.card-row a:hover img {
+    box-shadow: 0 0 10px rgba(0, 0, 0, .7);
+}
+
+.card-row h4 {
+    color: red;
+}
+
+.left-card-row {
+    margin-top: 20px;
+}
+
+.left-card-row img {
+    float: left;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .19);
+    transition: all .5s;
+}
+
+.left-card-row a:hover img {
+    box-shadow: 0 0 10px rgba(0, 0, 0, .7);
+}
+
+.left-card-row p {
+    padding: 15px;
+    padding-bottom: 0px;
+    text-align: center;
+}
+
+.left-card-row h4 {
+    color: red;
+    text-align: center;
+    padding: 15px;
+    padding-top: 0px;
+}
+
+.lower-card {
+    width: 100%;
+    height: auto;
+    margin-bottom: 100px;
+}
+
+/*--- Button to the top of the page ------*/
+
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: red; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+}
+
+
+
+/*----- Footer ------------------------*/
+
+footer {
+    color: white;
+    background-color: #222;
+    width: 100%;
+}
+
+footer a {
+    color: #bfffff;
+}
+
+footer a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    padding: 2em;
+}
+
+.footer-middle {
+    padding-top: 2em;
+}
+
+/*-------- Breakpoints ----------------*/
+
+@media screen and (min-width: 576px) {
+    .nav_bar {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 575px) {
+    .right_nav ul li a {
+        padding-left: 0px;
+        display: block;
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+    .collapse-list {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+    .list_collapse {
+        display: none;
+    }
+    .collapse-left-card {
+        display: none;
+    }
+}

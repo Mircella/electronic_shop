@@ -1,0 +1,422 @@
+body {
+    font-family: 'Roboto Slab', serif;
+    background: #fdfcfb;
+    font-weight: normal;
+}
+
+.selector-for-some-widget {
+    box-sizing: content-box;
+}
+
+
+/*--- Logo -----------------------*/
+
+.logo {
+    width: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+    font-size: 30px;
+
+}
+
+.logo_center {
+    font-weight: bold;
+    float:
+}
+
+
+.red_logo {
+    color: red;
+}
+
+/*-------------------------------*/
+
+/* Left Navbar ------------------*/
+
+#navbarSupportedContent a:hover {
+    background-color: #555;
+    color: white;
+}
+
+.nav_toggle {
+    float: right;
+}
+
+/*------------------------------*/
+
+/* Right Navbar */
+
+.right_nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+
+}
+
+.right_nav ul li {
+    display: inline;
+}
+
+.right_nav ul li a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, .5);
+    padding: .5rem;
+}
+
+
+.right_nav ul li a:hover {
+    background-color: #555;
+    color: white;
+}
+
+/*---------------------------------*/
+
+/*------ Main ---------------*/
+
+.left-product {
+    margin-top: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .19);
+
+}
+
+.right-product {
+    margin-top: 20px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .19);
+    margin-left: 5px;
+}
+
+.right-product h5 {
+    color: red;
+}
+
+.right-product h4 {
+    padding: 10px;
+    text-align: center;
+}
+
+body > div:nth-child(4) > div:nth-child(1) > div.col-sm-6.right-product > p:nth-child(3) > button {
+    background-color: red;
+    border: red;
+}
+
+
+
+.left-card-row {
+    margin-top: 20px;
+}
+
+.left-card-row img {
+    float: left;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .19);
+    transition: all .5s;
+}
+
+.left-card-row a:hover img {
+    box-shadow: 0 0 10px rgba(0, 0, 0, .7);
+}
+
+.left-card-row p {
+    padding: 15px;
+    padding-bottom: 0px;
+    text-align: center;
+}
+
+.left-card-row h4 {
+    color: red;
+    text-align: center;
+    padding: 15px;
+    padding-top: 0px;
+}
+
+#nav-home-tab {
+    background-color: red;
+    border: red;
+    color: white;
+    cursor: context-menu;
+    margin-bottom: 0px !important;
+
+}
+
+#nav-tab {
+    border-bottom: solid 2px red !important;
+}
+
+body > div:nth-child(4) > div:nth-child(2) > div.col-sm-3 > div {
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+/*------ Lower Main -------*/
+
+.heading {
+    font-size: 25px;
+    margin-right: 25px;
+}
+
+.fa {
+    font-size: 25px;
+}
+
+.checked {
+    color: orange;
+}
+
+body > div:nth-child(4) > div:nth-child(2) > div.col-sm-9.lower-main > button{
+    margin-top: 20px;
+}
+/* Users Rating -----------------------------*/
+/* Three column layout */
+
+.side {
+    float: left;
+    width: 15%;
+    margin-top: 10px;
+}
+
+.middle {
+    float: left;
+    width: 70%;
+    margin-top: 10px;
+}
+
+/* Place text to the right */
+
+.right {
+    text-align: right;
+}
+
+/* Clear floats after the columns */
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* The bar container */
+
+.bar-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+}
+
+/* Individual bars */
+
+.bar-5 {
+    width: 60%;
+    height: 18px;
+    background-color: #4CAF50;
+}
+
+.bar-4 {
+    width: 30%;
+    height: 18px;
+    background-color: #2196F3;
+}
+
+.bar-3 {
+    width: 10%;
+    height: 18px;
+    background-color: #00bcd4;
+}
+
+.bar-2 {
+    width: 4%;
+    height: 18px;
+    background-color: #ff9800;
+}
+
+.bar-1 {
+    width: 15%;
+    height: 18px;
+    background-color: #f44336;
+}
+
+
+.lower-main {
+ margin-top: 20px;
+    
+}
+.lower-main1{
+    padding: 20px;
+}
+
+.checked {
+    color: orange;
+}
+
+.form{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Responsive layout - make the columns stack on top of each other instead of next to each other */
+
+@media (max-width: 400px) {
+    .side,
+    .middle {
+        width: 100%;
+    }
+    /* Hide the right column on small screens */
+    .right {
+        display: none;
+    }
+}
+
+/*----- Modal Img -----------------*/
+
+/* Style the Image Used to Trigger the Modal */
+
+#myImg {
+    border-radius: 5px;
+    cursor: zoom-in;
+    transition: 0.3s;
+}
+
+#myImg:hover {
+    opacity: 0.7;
+}
+
+/* The Modal (background) */
+
+.modal1 {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
+}
+
+/* Modal Content (Image) */
+
+.modal-content1 {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 400px;
+}
+
+/* Caption of Modal Image (Image Text) - Same Width as the Image */
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+/* Add Animation - Zoom in the Modal */
+
+.modal-content1 {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+    to {
+        transform: scale(1)
+    }
+}
+
+/* The Close Button */
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+
+@media only screen and (max-width: 700px) {
+    .modal-content1 {
+        width: 100%;
+    }
+}
+
+/*--- End of Modal Img --------------*/
+
+
+
+
+/*----- Footer ------------------------*/
+
+footer {
+    color: white;
+    background-color: #222;
+    width: 100%;
+}
+
+footer a {
+    color: #bfffff;
+}
+
+footer a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    padding: 2em;
+}
+
+.footer-middle {
+    padding-top: 2em;
+}
+
+
+/*-------- Breakpoints ----------------*/
+
+@media screen and (min-width: 576px) {
+    .nav_bar {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 575px) {
+    .right_nav ul li a {
+        padding-left: 0px;
+        display: block;
+    }
+    .right-product {
+        margin-left: 0px;
+    }
+
+}

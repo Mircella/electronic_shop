@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <link rel="icon" href="../img/books-piled-bookstore_318-31784.jpg">
+    <link rel="stylesheet" href="../css/product.css">
+    <meta name="description" content="Book Shop">
+    <meta name="keywords" content="Book, Shop, Book shop, Buy book, Free Book">
+    <meta name="author" content="Nassipolla Adil">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- Icons -->
+    <link href="../open-iconic-master/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icons for Rating -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css-stars.css">
+    <script src="jquery.barrating.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#example-css').barrating({
+                theme: 'css-stars'
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <div class="logo container">
+        <div class="logo_center">
+            <span>MAX</span><span class="red_logo">SHOP</span>
+        </div>
+    </div>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <div class="nav_bar">
+                <a class="navbar-brand" href="../home.html">Max Shop</a>
+            </div>
+            <div class="nav_toggle">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+            </button></div>
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          More
+        </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="media/media.html">Media</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="map/map.html">Map</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">About us</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categories
+        </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Popular</a>
+
+                                <a class="dropdown-item" href="#">Bestsellers</a>
+
+                                <a class="dropdown-item" href="#">Cooming Soon</a>
+                            </div>
+                        </li>
+                        <form class="form-inline">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                    </ul>
+                    <div class="right_nav">
+                        <ul>
+                            <li><a href="registration/sign_up.html"><span class="oi oi-person"></span> Log in / Sign up</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Purchase</h5>
+
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <img src="../img/ws600.jpg" alt="img" width="100%;" height="100%;">
+                        </div>
+                        <div class="col-sm-6">
+                            <h4>Product Name</h4>
+                            <h5>
+                                $60
+                            </h5>
+                            <form>
+                                Max (5):
+                                <input type="number" name="quantity" min="1" max="5">
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Buy it</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-sm-5 left-product">
+                <!-- Trigger the Modal -->
+                <img id="myImg" src="../img/ws600.jpg" alt="Trolltunga, Norway" width="100%;" height="100%;">
+                <!-- The Modal -->
+                <div id="myModal" class="modal1">
+                    <!-- The Close Button -->
+                    <span class="close">&times;</span>
+                    <!-- Modal Content (The Image) -->
+                    <img class="modal-content1" id="img01">
+                    <!-- Modal Caption (Image Text) -->
+                    <div id="caption">Product Name</div>
+                </div>
+
+                <!-- Script for Modal Img ------>
+                <script>
+                    // Get the modal
+                    var modal = document.getElementById('myModal');
+
+                    // Get the image and insert it inside the modal - use its "alt" text as a caption
+                    var img = document.getElementById('myImg');
+                    var modalImg = document.getElementById("img01");
+
+                    img.onclick = function() {
+                        modal.style.display = "block";
+                        modalImg.src = this.src;
+
+                    }
+
+                    // Get the <span> element that closes the modal
+                    var span = document.getElementsByClassName("close")[0];
+
+                    // When the user clicks on <span> (x), close the modal
+                    span.onclick = function() {
+                        modal.style.display = "none";
+                    }
+                </script>
+
+
+
+
+            </div>
+
+            <div class="col-sm-6 right-product">
+                <h4>
+                    Product Name
+                </h4>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                </p>
+                <p>
+                    <select id="example-css">
+  <option value=""></option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+</select>
+                </p>
+                <h5>
+                    $60
+                </h5>
+                <p>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Buy
+</button>
+                </p>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="row">
+            <div class="col-sm-9 lower-main">
+
+
+                <ul class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Rating</a>
+                    </li>
+
+                </ul>
+                <div class="lower-main1">
+                    <span class="heading">User Rating</span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <p>4.1 average based on 254 reviews.</p>
+                    <hr style="border:3px solid #f1f1f1">
+
+                    <div class="row">
+                        <div class="side">
+                            <div>5 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-5"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>150</div>
+                        </div>
+                        <div class="side">
+                            <div>4 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-4"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>63</div>
+                        </div>
+                        <div class="side">
+                            <div>3 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-3"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>15</div>
+                        </div>
+                        <div class="side">
+                            <div>2 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-2"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>6</div>
+                        </div>
+                        <div class="side">
+                            <div>1 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-1"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>20</div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <ul class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Comment</a>
+                    </li>
+
+                </ul>
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">
+  Write Comment
+</button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Comment</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlInput1">Email address</label>
+                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="formGroupExampleInput">Name</label>
+                                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Jonh">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Example textarea</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-3">
+                <div class="collapse-left-card">
+                    <ul class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">You may also like</a>
+                        </li>
+
+                    </ul>
+
+                    <div class="left-card-row">
+                        <a href="#"><img src="../img/Layer%20106.png" alt="img" width="80px;" height="100px;"></a>
+                        <div>
+                            <p>Art of War</p>
+                            <h4>$60</h4>
+                        </div>
+                    </div>
+
+                    <div class="left-card-row">
+                        <a href="#"><img src="../img/Layer%20107.png" alt="img" width="80px;" height="100px;"></a>
+                        <div>
+                            <p>Art of War</p>
+                            <h4>$79</h4>
+                        </div>
+                    </div>
+
+                    <div class="left-card-row">
+                        <a href="#"><img src="../img/Layer%20108.png" alt="img" width="80px;" height="100px;"></a>
+                        <div>
+                            <p>Art of War</p>
+                            <h4>$120</h4>
+                        </div>
+                    </div>
+
+                    <div class="left-card-row">
+                        <a href="#"><img src="../img/Layer%20109.png" alt="img" width="80px;" height="100px;"></a>
+                        <div>
+                            <p>Art of War</p>
+                            <h4>$49</h4>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footer-middle">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <!--Column1-->
+                        <div class="footer-pad">
+                            <h4>Address</h4>
+                            <address>
+								<ul class="list-unstyled">
+									<li>
+                    City Hall<br>
+										212  Street<br>
+										Lawoma<br>
+										735<br>
+									</li>
+									<li>
+										Phone: 0
+									</li>
+								</ul>
+							</address>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <!--Column1-->
+                        <div class="footer-pad">
+                            <h4>Popular Services</h4>
+                            <ul class="list-unstyled">
+                                <li><a href="#"></a></li>
+                                <li><a href="#">Payment Center</a></li>
+                                <li><a href="#">Contact Directory</a></li>
+                                <li><a href="#">Forms</a></li>
+                                <li><a href="#">News and Updates</a></li>
+                                <li><a href="#">FAQs</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <!--Column1-->
+                        <div class="footer-pad">
+                            <h4>Website Information</h4>
+                            <ul class="list-unstyled">
+                                <li><a href="#">Website Tutorial</a></li>
+                                <li><a href="#">Accessibility</a></li>
+                                <li><a href="#">Disclaimer</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="#">FAQs</a></li>
+                                <li><a href="#">Webmaster</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!--Footer Bottom-->
+                        <p class="text-xs-center">&copy; Copyright 2016 - MAXSHOP. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+</body>
+</html>
