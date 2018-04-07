@@ -18,3 +18,8 @@
 // function init(){
 // document.getElementById("defaultOpen").click();
 // }
+$(document).ready(function init() {
+    $(".listgroup").click(function () {
+        $("#div1").toggle(1000);
+    });
+});

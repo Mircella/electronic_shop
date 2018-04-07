@@ -8,16 +8,19 @@
     <link rel="stylesheet" th:href="@{/resources/css/reviews.css}">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
-    <!-- Google fonts -->
-    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto+Slab}" rel="stylesheet">
+    <!-- jQuery library -->
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <!-- Latest compiled JavaScript -->
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
     <!-- Icons -->
     <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css}"
           rel="stylesheet">
+    <!-- Add icon library -->
+    <link rel="stylesheet"
+          th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <!-- Google fonts -->
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto+Slab}" rel="stylesheet">
 
-    <!-- Latest compiled JavaScript -->
-    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
-    <!-- jQuery library -->
-    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
     <!-- Google translate -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -84,7 +87,7 @@
                             </a>
                         </div>
                     </li>
-                    <form class="form-inline">
+                    <form class="form-inline" th:action="@{/search}">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </ul>

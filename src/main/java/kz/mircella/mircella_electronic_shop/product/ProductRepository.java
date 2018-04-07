@@ -16,6 +16,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query(nativeQuery = true, value = "SELECT * FROM products ORDER BY price ASC LIMIT :limit")
     List<Product> getProductsWithLowPrice(@Param("limit") int limit);
 
+    @Query(nativeQuery = true, value = "SELECT * FROM products ORDER BY price ASC LIMIT :limit")
+    List<Product> getExpensiveProductsWithLimit(@Param("limit") int limit);
+
     List<Product> getProductsByProductCategory(ProductCategory category);
 
     @Query("select p from Product p where p.title like %:search% or p.description like %:search%")

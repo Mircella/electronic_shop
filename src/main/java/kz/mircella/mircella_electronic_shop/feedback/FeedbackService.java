@@ -23,7 +23,7 @@ public class FeedbackService {
     private FeedbackMapper feedbackMapper;
 
     @Transactional
-    private Feedback saveFeedback(Feedback feedback) {
+    public Feedback saveFeedback(Feedback feedback) {
         return feedbackRepository.saveAndFlush(feedback);
     }
 

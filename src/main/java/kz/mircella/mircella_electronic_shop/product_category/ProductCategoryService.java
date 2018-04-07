@@ -16,7 +16,6 @@ public class ProductCategoryService {
 
     public List<ProductCategory> getAllProductCategories() {
         List<ProductCategory> productCategories = productCategoryRepository.findAll();
-        productCategories.forEach(productCategory -> productCategory.getProducts());
         validateProductCategories(productCategories);
         return productCategories;
     }
@@ -31,11 +30,13 @@ public class ProductCategoryService {
         if (productCategories == null) {
             throw new NotFoundException("There are no productCategories");
         }
+        productCategories.forEach(productCategory -> productCategory.getProducts());
     }
 
     private void validateProductCategory(ProductCategory category, long id) {
         if (category == null) {
             throw new NotFoundException("There is no category with id %d", id);
         }
+        category.getProducts();
     }
 }

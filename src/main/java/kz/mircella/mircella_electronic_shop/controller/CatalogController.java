@@ -8,6 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -24,5 +27,18 @@ public class CatalogController {
         return "category";
     }
 
+    @GetMapping(value = "/search")
+    public String searchPage(Model model) {
+        List<ProductCategory> productCategories = productCategoryService.getAllProductCategories();
+        model.addAttribute("categories", productCategories);
+        return "search";
+    }
+
+    @PostMapping(value = "/search")
+    public String searchResultsPage(Model model) {
+        List<ProductCategory> productCategories = productCategoryService.getAllProductCategories();
+        model.addAttribute("categories", productCategories);
+        return "redirect:/search";
+    }
 
 }

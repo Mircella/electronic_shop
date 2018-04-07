@@ -26,10 +26,10 @@ public class ProductService {
         return productRepository.getProductsWithLowPrice(amount);
     }
 
+    //public List<Product> getExpensiveProducts(){}
+
     public Product getProductById(long id) {
         Product product = productRepository.getOne(id);
-        product.getFeedbacks();
-        product.getOrders();
         validateProduct(product, id);
         return product;
     }
@@ -63,5 +63,7 @@ public class ProductService {
         if(product == null){
             throw new NotFoundException("There is no product %d", id);
         }
+        product.getFeedbacks();
+        product.getOrders();
     }
 }

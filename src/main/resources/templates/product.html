@@ -3,22 +3,27 @@
 <head>
     <title th:text="#{site_title}"></title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
 
-
-    <link rel="stylesheet" th:href="@{resources/css/index.css}">
+    <link rel="stylesheet" th:href="@{/resources/css/product.css}">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
-    <!-- Google fonts -->
-    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto+Slab}" rel="stylesheet">
+    <!-- jQuery library -->
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <!-- Latest compiled JavaScript -->
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
     <!-- Icons -->
     <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css}"
           rel="stylesheet">
-
-    <!-- Latest compiled JavaScript -->
-    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
-    <!-- jQuery library -->
-    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <!-- Google fonts -->
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto+Slab}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/resources/js/product.js}"/>
+    <!-- Add icon library -->
+    <link rel="stylesheet"
+          th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <!-- Icons for Rating -->
+    <link rel="stylesheet" th:href="@{http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{css-stars.css}" type="text/css">
     <!-- Google translate -->
     <script type="text/javascript">
         function googleTranslateElementInit() {
@@ -26,121 +31,389 @@
                 pageLanguage: 'en'
             }, 'google_translate_element');
         }
-
     </script>
     <script type="text/javascript"
-            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+            th:src="@{//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit}"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('#example-css').barrating({
+                theme: 'css-stars'
+            });
+        });
+    </script>
+    <!--<link rel="icon" href="../img/books-piled-bookstore_318-31784.jpg">-->
 </head>
 <body>
-<div class="container demo">
-    <ul class="breadcrumb">
-        <li><a th:href="@{/}">Home</a></li>
-        <li class="active">Product</li>
-    </ul>
-    <div class="main clearfix">
-        <div class="img">
-            <picture>
-                <img th:src="@{${'/resources/images/index/products/'+product.path}}" alt="product_picture">
-            </picture>
+<div class="logo container">
+    <div class="logo_center">
+        <span>Electronic</span><span class="red_logo">Shop</span>
+    </div>
+</div>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="nav_bar">
+            <a class="navbar-brand" th:href="@{/}">Electronic Shop</a>
         </div>
-        <div class="description">
-            <div class="des" th:if="${product!=null}">
-                <h1 th:utext="${product.title}"></h1>
-                <p>Status:
-                    <span th:if="${product.count>0}">In stock</span>
-                    <span th:if="${product.count<=0}">No stock</span>
+        <div class="nav_toggle">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            More
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/reviews}">Reviews</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/contacts}">Contacts</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/promotions}">Promotions</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item"
+                               th:each="category:${categories}"
+                               th:href="@{${'/catalog/'+category.id}}"
+                               th:text="${category.title}">
+                                <span th:if="${category.id == 1}" class="badge badge-primary badge-pill">2</span>
+                                <span th:if="${category.id == 3}" class="badge badge-secondary">New</span>
+                            </a>
+                        </div>
+                    </li>
+                    <form class="form-inline" th:action="@{/search}">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </ul>
+                <div class="right_nav">
+                    <ul>
+                        <li>
+                            <a th:if="${#request.userPrincipal==null}" th:href="@{/login}"><span
+                                    class="oi oi-person"></span>Log in / Sign up</a>
+                        </li>
+                        <li>
+                            <a th:if="${#request.userPrincipal!=null}" th:href="@{/logout}"><span
+                                    class="glyphicon glyphicon-log-out"></span>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-5 left-product">
+            <!-- Trigger the Modal -->
+            <img id="myImg" th:src="@{${'/resources/images/index/products/'+product.path}}" alt="Trolltunga, Norway"
+                 width="100%;" height="100%;">
+            <!-- The Modal -->
+            <div id="myModal" class="modal1">
+                <!-- The Close Button -->
+                <span class="close">&times;</span>
+                <!-- Modal Content (The Image) -->
+                <img class="modal-content1" id="img01">
+                <!-- Modal Caption (Image Text) -->
+                <div id="caption">Product Name</div>
+            </div>
+        </div>
+
+        <div class="col-sm-6 right-product" th:if="${product!=null}">
+            <h4 th:utext="${product.title}"></h4>
+            <p th:utext="${product.description}">
+            </p>
+            <div class="description">
+                <div class="des" th:if="${product!=null}">
+                    <p>Status:
+                        <span th:if="${product.count>0}">In stock</span>
+                        <span th:if="${product.count<=0}">No stock</span>
+                    </p>
+                </div>
+                <div class="price" th:if="${product!=null}">
+                    <h2>Our price:<span th:text="${product.price}"></span>$</h2>
+                    <a th:href="@{/cart}"><img th:src="@{/resources/images/product/addtocart.png}" alt="add cart"></a>
+                </div>
+                <p>
+                    <select id="example-css">
+                        <option value=""></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
                 </p>
             </div>
-            <div class="price" th:if="${product!=null}">
-                <h2>Our price: <span th:text="${product.price}"></span></h2>
-                <a th:href="@{/cart}"><img th:src="@{/resources/images/product/addtocart.png}" alt="add cart"></a>
-            </div>
-        </div>
-    </div>
-
-    <div class="comment clearfix">
-        <div class="leftcolumn">
-            <!-- Навигационные вкладки -->
-            <ul class="nav nav-tabs nav-justified" role="tablist">
-                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
-                                                          data-toggle="tab">Product Information</a></li>
-                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Feedbacks</a>
-                </li>
-            </ul>
-
-            <!-- Вкладки панелей -->
-            <div class="tab-content clearfix" th:if="${product!=null}">
-                <div roleEnum="tabpanel" class="tab-pane active" id="home">
-                    <p class="demo_1" th:utext="${product.description}"></p>
-                    <div th:if="${feedbacks==null}">
-                        <div class="des">
-                            <h4>There are no feedbacks about the product. Be first!</h4>
-                        </div>
-                    </div>
-                    <div th:if="${feedbacks != null}">
-                        <div class="des">
-                            <h4>Here you can leave your feedback about the product!</h4>
-                        </div>
-                    </div>
-                    <div class="clearfix" th:if="${#request.userPrincipal!=null}">
-                        <form class="navbar-form navbar-left" method="post" action=""
-                              th:action="@{${'/product/'+product.id}}">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Feedback text" name="text">
-                                <div class="input-group-btn">
-                                    <button>Send</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="clearfix" th:if="${#request.userPrincipal==null}">You have no rights to leave a feedback</div>
-                    <div class="description" th:if="${feedbacks != null}">
-                        <div class="des" th:each="feedback:${feedbacks}">
-                            <div class="feedback">
-                                <p th:text="${feedback.text}"></p>
-                                <p>Posted by: <span th:text="${feedback.user.username}"></span></p>
-                                <p>Date: <span th:text="${feedback.date}"></span></p>
-                                <hr/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
-        <div class="undercolumn inline">
-            <div class="card inline">
-                <h3>You may also like</h3>
-                <div class="fakeimg inline">
-                    <div class="img-1">
-                        <img th:src="@{/resources/images/index/products/product1.jpg}" alt="product_image">
-                    </div>
-                    <div class="text">
-                        <p>Product title</p>
-                        <p class="text_1">$50</p>
+
+        <div class="row">
+            <div class="col-sm-9 lower-main">
+                <ul class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                           role="tab"
+                           aria-controls="nav-home" aria-selected="true">Rating</a>
+                    </li>
+
+                </ul>
+                <div class="lower-main1">
+                    <span class="heading">User Rating</span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <p>4.1 average based on 254 reviews.</p>
+                    <hr style="border:3px solid #f1f1f1">
+                    <div class="row">
+                        <div class="side">
+                            <div>5 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-5"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>150</div>
+                        </div>
+                        <div class="side">
+                            <div>4 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-4"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>63</div>
+                        </div>
+                        <div class="side">
+                            <div>3 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-3"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>15</div>
+                        </div>
+                        <div class="side">
+                            <div>2 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-2"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>6</div>
+                        </div>
+                        <div class="side">
+                            <div>1 star</div>
+                        </div>
+                        <div class="middle">
+                            <div class="bar-container">
+                                <div class="bar-1"></div>
+                            </div>
+                        </div>
+                        <div class="side right">
+                            <div>20</div>
+                        </div>
                     </div>
                 </div>
-                <div class="fakeimg inline">
-                    <div class="img-1">
-                        <img th:src="@{/resources/images/index/products/product2.jpg}" alt="product_image">
-                    </div>
-                    <div class="text">
-                        <p>Product title</p>
-                        <p class="text_1">$50</p>
+                <ul class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                           role="tab"
+                           aria-controls="nav-home" aria-selected="true">Feedbacks</a>
+                    </li>
+
+                </ul>
+                <div th:if="${feedbacks==null}">
+                    <div class="des">
+                        <h4>There are no feedbacks about the product. Be first!</h4>
                     </div>
                 </div>
-                <div class="fakeimg inline">
-                    <div class="img-1">
-                        <img th:src="@{/resources/images/index/products/product3.jpg}" alt="product_image">
+                <div th:if="${feedbacks != null}">
+                    <div class="des">
+                        <h4>Here you can leave your feedback about the product!</h4>
                     </div>
-                    <div class="text">
-                        <p>Product title</p>
-                        <p class="text_1">$50</p>
+                </div>
+                <div class="description" th:if="${feedbacks != null}">
+                    <div class="des" th:each="feedback:${feedbacks}">
+                        <div class="feedback">
+                            <p th:text="${feedback.text}"></p>
+                            <p>Posted by: <span th:text="${feedback.user.username}"></span></p>
+                            <p>Date: <span th:text="${feedback.date}"></span></p>
+                            <hr/>
+                        </div>
+                    </div>
+                </div>
+                <p th:if="${#request.userPrincipal==null}">You have no rights to leave a feedback!</p>
+                <!-- Button trigger modal -->
+                <button th:if="${#request.userPrincipal!=null}" type="button" class="btn btn-primary"
+                        data-toggle="modal" data-target="#Modal">
+                    Write Comment
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Comment</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="" th:action="@{${'/product/'+product.id}}">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlTextarea1">Example textarea</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1"
+                                                  placeholder="Text of feedback" rows="3" name="text"></textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                            Close
+                                        </button>
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="collapse-left-card">
+                    <ul class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+                               role="tab" aria-controls="nav-home" aria-selected="true">You may also like</a>
+                        </li>
+                    </ul>
+
+                    <div class="left-card-row">
+                        <a href="#"><img th:src="@{/resources/images/index/products/product1.jpg}" alt="img"
+                                         width="80px;" height="100px;"></a>
+                        <div>
+                            <p>Product</p>
+                            <h4>$60</h4>
+                        </div>
+                    </div>
+
+                    <div class="left-card-row">
+                        <a href="#"><img th:src="@{/resources/images/index/products/product2.jpg}" alt="img"
+                                         width="80px;" height="100px;"></a>
+                        <div>
+                            <p>Product</p>
+                            <h4>$79</h4>
+                        </div>
+                    </div>
+
+                    <div class="left-card-row">
+                        <a href="#"><img th:src="@{/resources/images/index/products/product3.jpg}" alt="img"
+                                         width="80px;" height="100px;"></a>
+                        <div>
+                            <p>Product</p>
+                            <h4>$120</h4>
+                        </div>
+                    </div>
+
+                    <div class="left-card-row">
+                        <a href="#"><img th:src="@{/resources/images/index/products/product4.jpg}" alt="img"
+                                         width="80px;" height="100px;"></a>
+                        <div>
+                            <p>Product</p>
+                            <h4>$49</h4>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<footer>
+    <div class="footer-middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <!--Column1-->
+                    <div class="footer-pad">
+                        <h4>Address</h4>
+                        <address>
+                            <ul class="list-unstyled">
+                                <li>
+                                    City Hall<br>
+                                    212 Street<br>
+                                    Lawoma<br>
+                                    735<br>
+                                </li>
+                                <li>
+                                    Phone: 0
+                                </li>
+                            </ul>
+                        </address>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!--Column1-->
+                    <div class="footer-pad">
+                        <h4>How to buy the product?</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="#">Payment</a></li>
+                            <li><a href="#">Conditions of return</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!--Column1-->
+                    <div class="footer-pad">
+                        <h4>Contacts</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Technical support</a></li>
+                            <li>
+                                <div id="google_translate_element"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!--Footer Bottom-->
+                    <p class="text-xs-center">&copy; Copyright 2016 - Electronic Shop. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<script th:src="@{/resources/js/product.js}"></script>
 </body>
 </html>

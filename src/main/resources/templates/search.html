@@ -3,109 +3,200 @@
 <head>
     <title th:text="#{site_title}"></title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" th:href="@{resources/css/product.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{/resources/css/reviews.css}">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
+    <!-- jQuery library -->
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <!-- Latest compiled JavaScript -->
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+    <!-- Icons -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css}"
+          rel="stylesheet">
+    <!-- Add icon library -->
+    <link rel="stylesheet"
+          th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <!-- Google fonts -->
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto+Slab}" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/resources/js/search.js}"/>
+    <!-- Google translate -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en'
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
+<div class="logo container">
+    <div class="logo_center">
+        <span>Electronic</span><span class="red_logo">Shop</span>
+    </div>
+</div>
 <header>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header ">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" th:href="@{/}" th:text="#{site_title}"></a>
-            </div>
-
-            <form class="navbar-form navbar-left" method="post" action="" th:action="@{/search}">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="title">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a th:href="@{/}">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" roleEnum="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/promotions}">Our promotions</a></li>
-                            <li><a th:href="@{/reviews}">Reviews</a></li>
-                        </ul>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="nav_bar">
+            <a class="navbar-brand" th:href="@{/}">Electronic Shop</a>
+        </div>
+        <div class="nav_toggle">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/}">Home <span class="sr-only"> (current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            More
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/reviews}">Reviews</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/contacts}">Contacts</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/promotions}">Promotions</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item"
+                               th:each="category:${categories}"
+                               th:href="@{${'/catalog/'+category.id}}"
+                               th:text="${category.title}">
+                                <span th:if="${category.id == 1}" class="badge badge-primary badge-pill">2</span>
+                                <span th:if="${category.id == 3}" class="badge badge-secondary">New</span>
+                            </a>
+                        </div>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a th:href="@{/sign_up}"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-                    <li><a th:if="${#request.userPrincipal!=null}" th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-                    <li><a th:if="${#request.userPrincipal==null}" th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-                </ul>
+                <div class="right_nav">
+                    <ul>
+                        <li>
+                            <a th:if="${#request.userPrincipal==null}" th:href="@{/login}"><span
+                                    class="oi oi-person"></span>Log in / Sign up</a>
+                        </li>
+                        <li>
+                            <a th:if="${#request.userPrincipal!=null}" th:href="@{/logout}"><span
+                                    class="glyphicon glyphicon-log-out"></span>Logout</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
 </header>
-
-<div class="container demo">
-    <ul class="breadcrumb">
-        <li><a th:href="@{/}">Home</a></li>
-        <li class="active">Search results</li>
-    </ul>
-    <div class="main clearfix" th:each="product:${products}">
-        <div class="img">
-            <picture>
-                <source th:src="@{${'/resources/images/index/products/'+product.path}}" media="(max-width: 500px)">
-                <img th:src="@{${'/resources/images/index/products/'+product.path}}" alt="product">
-            </picture>
-        </div>
-        <div class="description">
-            <div class="des">
-                <h4 th:text="${product.title}"></h4>
-                <p th:text="${product.description}"></p>
-            </div>
-
-            <div class="price">
-                <h6 th:text="${product.price}"></h6>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-3">
-                <ul class="list-unstyled">
-                    <li>How to buy the product?
-                    <li>
-                    <li><a href="#">Shipping</a></li>
-                    <li><a href="#">Payment</a></li>
-                    <li><a href="#">Conditions of return</a></li>
-                </ul>
-            </div>
-            <div class="col-xs-3">
-                <ul class="list-unstyled">
-                    <li>Contacts
-                    <li>
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Technical support</a></li>
-                </ul>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-xs-4">
-                <p class="text-muted pull-right">© 2018 Electronic shop. All rights reserved</p>
-            </div>
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-md-12 lower-main">
+            <form method="post" action="" th:action="@{/search}">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for books.." name="title">
+                <div id="myBtnContainer">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </div>
+            </form>
+            <hr style="width: 5px">
+            <!--<div>-->
+                <!--<div class="img">-->
+                    <!--<picture>-->
+                        <!--<source th:src="@{${'/resources/images/index/products/'+product.path}}">-->
+                    <!--</picture>-->
+                <!--</div>-->
+                <!---->
+            <!--</div>-->
+            <ul id="myUL" th:each="product:${products}">
+                <li>
+                    <a href="#">
+                        <img th:src="@{${'/resources/images/index/products/'+product.path}}" media="(max-width: 500px)" alt="product">
+                    </a>
+                    <div class="description">
+                        <div class="des">
+                            <h5 th:text="${product.title}"></h5>
+                        </div>
+                        <div class="price">
+                            <h6 th:text="${product.price}"></h6>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
+<footer>
+    <div class="footer-middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <!--Column1-->
+                    <div class="footer-pad">
+                        <h4>Address</h4>
+                        <address>
+                            <ul class="list-unstyled">
+                                <li>
+                                    City Hall<br>
+                                    212 Street<br>
+                                    Lawoma<br>
+                                    735<br>
+                                </li>
+                                <li>
+                                    Phone: 0
+                                </li>
+                            </ul>
+                        </address>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!--Column1-->
+                    <div class="footer-pad">
+                        <h4>How to buy the product?</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="#">Payment</a></li>
+                            <li><a href="#">Conditions of return</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!--Column1-->
+                    <div class="footer-pad">
+                        <h4>Contacts</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Technical support</a></li>
+                            <li>
+                                <div id="google_translate_element"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!--Footer Bottom-->
+                    <p class="text-xs-center">&copy; Copyright 2016 - Electronic Shop. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>
