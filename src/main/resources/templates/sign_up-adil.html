@@ -7,8 +7,9 @@
 
     <title>Max Shop</title>
 
-<link rel="icon" href="../img/books-piled-bookstore_318-31784.jpg">
-    <link rel="stylesheet" href="../css/sign_up.css">
+    <link rel="icon" href="../img/books-piled-bookstore_318-31784.jpg">
+    <link rel="stylesheet" href="../css/sign_up-adil.css">
+    <link rel="stylesheet" href="bootstrap-formhelpers.css">
     <meta name="description" content="Book Shop">
     <meta name="keywords" content="Book, Shop, Book shop, Buy book, Free Book">
     <meta name="author" content="Nassipolla Adil">
@@ -60,7 +61,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="../media/media.html">Media</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="../map/map.html">Map</a>
+                                <a class="dropdown-item" href="map/map.html">Promotions</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">About us</a>
                             </div>
@@ -121,7 +122,7 @@
 
                 <div class="right-main col-sm-6">
                     <h4>Sign up</h4>
-                    <form autocomplete="on">
+                    <form autocomplete="on" id="todo-form">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Email address</label>
                             <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email" required>
@@ -130,17 +131,30 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" class="form-control" placeholder="Password" required>
+                        </div>
+
+                        <div class="form-group" id="card-credit">
+                            <label for="formGroupExampleInput">Credit Card</label>
+                            <input class="form-control" maxlength="16" id="card" type="text" placeholder="1111-2222-3333-4444" required>
 
                         </div>
+
+
                         <div class="form-group">
-                            <label for="formGroupExampleInput">Credit Card</label>
-                            <input class="form-control" maxlength="16" type="text" placeholder="1111-2222-3333-4444" required>
+                            <label for="formGroupExampleInput">Phone number</label>
+                            <input type="text" class="form-control bfh-phone" value="77777777777" data-format="+d (ddd) ddd-dddd">
                         </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">Country</label>
+                            <div class="bfh-selectbox bfh-countries" data-country="KZ" data-flags="true">
+                            </div>
+                        </div>
+
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
                             <label class="form-check-label" for="exampleCheck1">Check me out</label>
                         </div>
-                        <button class="btn btn-primary">Register</button>
+                        <button class="btn btn-primary" type="submit">Register</button>
                     </form>
                 </div>
             </div>
@@ -214,6 +228,11 @@
             </div>
         </div>
     </footer>
+
+
+
+    <script src="bootstrap-formhelpers.min.js"></script>
+    <script src="../js/registration.js"></script>
 </body>
 
 </html>
