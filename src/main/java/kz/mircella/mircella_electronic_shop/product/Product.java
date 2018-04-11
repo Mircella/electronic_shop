@@ -44,7 +44,7 @@ public class Product implements Serializable {
     @JoinColumn(name = "product_category_id", nullable = false, referencedColumnName = "id")
     private ProductCategory productCategory;
 
-    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, targetEntity = Order.class, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY, targetEntity = Order.class, cascade = CascadeType.ALL)
     private Set<Order> orders;
 
     @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, targetEntity = Feedback.class, cascade = CascadeType.ALL)

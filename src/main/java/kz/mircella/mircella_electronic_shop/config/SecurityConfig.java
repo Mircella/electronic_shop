@@ -44,7 +44,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/login",
                         "/sign_up",
                         "/product",
-                        "/reviews")
+                        "/reviews",
+                        "/mail")
                 .permitAll();
 
         http

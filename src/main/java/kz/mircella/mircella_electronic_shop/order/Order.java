@@ -2,12 +2,13 @@ package kz.mircella.mircella_electronic_shop.order;
 
 import kz.mircella.mircella_electronic_shop.product.Product;
 import kz.mircella.mircella_electronic_shop.user.entity.User;
-import lombok.Builder;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -15,36 +16,36 @@ public class Order implements Serializable {
 
     private static final long serialVersionUID = -551583044612458621L;
 
+    @Id
+    private Long id;
+
     @Column(name = "order_date", length = 100, nullable = false)
     @Temporal(value = TemporalType.DATE)
     private Date orderDate;
 
-    @EmbeddedId
-    private OrderId orderId;
-
     @ManyToOne
-    @MapsId("user_id")
-    @JoinColumn(name = "user_id",nullable = false,referencedColumnName = "id")
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
-    @ManyToOne
-    @MapsId("product_id")
-    @JoinColumn(name = "product_id",nullable = false,referencedColumnName = "id")
-    private Product product;
-
-    @Column(length = 100, nullable = false)
-    private int count;
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Product.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "orders_products",
+            joinColumns = @JoinColumn(name = "order_id", nullable = false, referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id", table = "products", nullable = false, referencedColumnName = "id"))
+    private List<Product> products;
 
     public Order() {
     }
 
-
-    public Order(OrderId orderId, Date orderDate, int count, User user, Product product) {
-        this.orderId = orderId;
+    public Order(Date orderDate, double price, User user) {
         this.orderDate = orderDate;
-        this.count = count;
         this.user = user;
-        this.product = product;
+    }
+
+    public Order(Long id, Date orderDate, User user, List<Product> products) {
+        this.id = id;
+        this.orderDate = orderDate;
+        this.user = user;
+        this.products = products;
     }
 
     public Date getOrderDate() {
@@ -55,22 +56,6 @@ public class Order implements Serializable {
         this.orderDate = orderDate;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public OrderId getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(OrderId orderId) {
-        this.orderId = orderId;
-    }
-
     public User getUser() {
         return user;
     }
@@ -79,12 +64,12 @@ public class Order implements Serializable {
         this.user = user;
     }
 
-    public Product getProduct() {
-        return product;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override
@@ -92,24 +77,22 @@ public class Order implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Order)) return false;
         Order order = (Order) o;
-        return getCount() == order.getCount() &&
+        return Objects.equals(id, order.id) &&
                 Objects.equals(getOrderDate(), order.getOrderDate()) &&
                 Objects.equals(getUser(), order.getUser()) &&
-                Objects.equals(getProduct(), order.getProduct());
+                Objects.equals(getProducts(), order.getProducts());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getOrderDate(), getUser(), getProduct(), getCount());
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-                ", orderDate=" + orderDate +
-                ", entity=" + user.getUsername() +
-                ", product=" + product.getTitle() +
-                ", count=" + count +
-                '}';
+        return Objects.hash(id, getOrderDate(), getUser(), getProducts());
     }
 }

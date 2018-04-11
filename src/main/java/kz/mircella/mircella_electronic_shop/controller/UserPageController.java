@@ -1,11 +1,15 @@
 package kz.mircella.mircella_electronic_shop.controller;
 
+import kz.mircella.mircella_electronic_shop.product_category.ProductCategory;
+import kz.mircella.mircella_electronic_shop.product_category.ProductCategoryService;
 import kz.mircella.mircella_electronic_shop.user.entity.RoleEnum;
 import kz.mircella.mircella_electronic_shop.user.entity.User;
 import kz.mircella.mircella_electronic_shop.user.entity.UserDto;
 import kz.mircella.mircella_electronic_shop.user.entity.UserMapper;
 import kz.mircella.mircella_electronic_shop.user.UserService;
 import kz.mircella.mircella_electronic_shop.util.WebUtil;
+import kz.mircella.mircella_electronic_shop.util.message.MailBuilder;
+import kz.mircella.mircella_electronic_shop.util.message.MailServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -17,39 +21,39 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
-public class UserPageController {
+class UserPageController {
 
     private UserService userService;
     private UserMapper userMapper;
+    private ProductCategoryService productCategoryService;
+    private MailServiceImpl emailService;
 
-    @GetMapping(value = "/sign_up")
-    public String signUp(Model model) {
-        return "sign_up";
-    }
-
-    @PostMapping(value = "/sign_up")
-    public ModelAndView productSearch(@Valid @ModelAttribute("user") User user) {
-        ModelAndView model = new ModelAndView("redirect:/");
+    @PostMapping(value = "/sign-up")
+    String signUp(@Valid @ModelAttribute("user") User user, Model model) {
         String name = user.getUsername();
         String email = user.getEmail();
         String password = user.getPassword();
         Long card = user.getCard();
         User saved = new User(name, email, password, "user.jpg", card, RoleEnum.ROLE_USER);
-        User savedUser = userService.saveUser(saved);
-        return model;
+        userService.saveUser(saved);
+        emailService.sendEmail(MailBuilder.buildConfirmationEmail(name, email));
+        String message = "Confirmation letter was sent to your email";
+        model.addAttribute("message",message);
+        return "authorization";
     }
 
     @GetMapping(value = "/login")
-    public String login(Model model) {
+    String login(Model model) {
         return "authorization";
     }
 
     @GetMapping(value = "/user-page")
-    public String userPage(Model model, Principal principal) {
-
+    String userPage(Model model, Principal principal) {
+        List<ProductCategory> productCategories = productCategoryService.getAllProductCategories();
         org.springframework.security.core.userdetails.User loginedUser =
                 (org.springframework.security.core.userdetails.User)
                         ((Authentication) principal).getPrincipal();
@@ -57,16 +61,17 @@ public class UserPageController {
         User user = userService.getUserByName(username);
         UserDto userDto = userMapper.mapAppUserToUserUserDto(user);
         model.addAttribute("userDto", userDto);
+        model.addAttribute("categories", productCategories);
         return "user";
     }
 
     @GetMapping(value = "/logout-successful")
-    public String logout(Model model) {
+    String logout(Model model) {
         return "redirect:/";
     }
 
     @GetMapping(value = "/denied")
-    public String denyAccess(Model model, Principal principal) {
+    String denyAccess(Model model, Principal principal) {
         org.springframework.security.core.userdetails.User loginedUser;
         if (principal != null) {
             loginedUser = (org.springframework.security.core.userdetails.User)

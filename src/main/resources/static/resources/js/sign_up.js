@@ -27,19 +27,6 @@ $(document).ready(function(){
         		$("#error_email").text("");
         	}
        });
-       //  $("#dob").focusout(function(){
-    // 	if($(this).val()==''){
-    //  		$(this).css("border-color", "#FF0000");
-    //  			$('#submit').attr('disabled',true);
-    //  			$("#error_dob").text("* You have to enter your Date of Birth!");
-    //  	}
-    //  	else
-    //  	{
-    //  		$(this).css("border-color", "#2eb82e");
-    //  		$('#submit').attr('disabled',false);
-    //  		$("#error_dob").text("");
-    //  	}
-    // });
         $("#password").focusout(function(){
     		if($(this).val()==''){
         		$(this).css("border-color", "#FF0000");
@@ -113,7 +100,4 @@ $(document).ready(function(){
                 $("#error_credit_card").text("");
             }
 			});
-
-
-    	
 	});

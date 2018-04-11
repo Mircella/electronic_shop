@@ -21,9 +21,7 @@ body {
 
 .logo_center {
     font-weight: bold;
-    float:
 }
-
 
 .red_logo {
     color: red;
@@ -56,7 +54,6 @@ body {
 
 .right_nav ul li {
     display: inline;
-
 }
 
 .right_nav ul li a {
@@ -73,14 +70,51 @@ body {
 
 /*---------------------------------*/
 
-/*--- Main -----------------*/
+/*-------- Main -------------------*/
 
-.main {
-    margin: 15px;
+.left-profile {
+    width: 100%;
     box-shadow: 0 0 5px rgba(0, 0, 0, .19);
-    padding: 10px;
+    height: 550px;
+    margin-top: 20px;
     margin-bottom: 100px;
+
 }
+
+.left-profile p {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0px;
+
+}
+
+.main-profile {
+    width: 100%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .19);
+    height: 400px;
+    margin-top: 20px;
+
+}
+
+.main-profile h4 {
+    padding: 20px;
+    text-align: center;
+}
+
+.main-profile p {
+    margin: 0px;
+    padding-left: 15px;
+    padding-top: 15px;
+}
+
+.container h1 {
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 
 
 
@@ -107,42 +141,6 @@ footer a:hover {
 .footer-middle {
     padding-top: 2em;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*-------- Breakpoints ----------------*/
 
 @media screen and (min-width: 576px) {
@@ -152,16 +150,20 @@ footer a:hover {
 
 }
 
+@media screen and (max-width: 576px) {
+    .main-profile {
+        margin-top: 20px;
+        margin-bottom: 100px;
+    }
+    .left-profile {
+        margin-bottom: 0px;
+    }
+}
+
 @media screen and (max-width: 575px) {
     .right_nav ul li a {
         padding-left: 0px;
         display: block;
-    }
-    .main {
-        margin: 25px;
-    }
-    .right-main {
-        padding-top: 15px;
     }
 
 }

@@ -3,38 +3,194 @@
 <head>
     <title th:text="#{site_title}"></title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-    <link rel="stylesheet" th:href="@{resources/css/index.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" th:href="@{resources/css/user.css}">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
+    <!-- jQuery library -->
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <!-- Latest compiled JavaScript -->
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
     <!-- Google fonts -->
     <link th:href="@{https://fonts.googleapis.com/css?family=Roboto+Slab}" rel="stylesheet">
     <!-- Icons -->
     <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css}"
           rel="stylesheet">
-
-    <!-- Latest compiled JavaScript -->
-    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
-    <!-- jQuery library -->
-    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
 </head>
 <body>
-
-<div>
-    <div th:if="${userDto != null}">
-        <div>
-            <img th:src="@{${'/resources/images/index/users/'+userDto.photoPath}}" style="max-width: 200px" alt="user_image">
+<div class="logo container">
+    <div class="logo_center">
+        <span>Electronic</span><span class="red_logo">Shop</span>
+    </div>
+</div>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="nav_bar">
+            <a class="navbar-brand" th:href="@{/}">Electronic Shop</a>
         </div>
-        <div>
-            <div>
-                <h4>Wellcome <span th:text="${userDto.userName}"></span>!</h4>
-                <p th:text="${userDto.userEmail}"></p>
+        <div class="nav_toggle">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/}"><span class="oi oi-home"></span>Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            More
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/reviews}">Reviews</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/contacts}">Contacts</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/promotions}">Promotions</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item"
+                               th:each="category:${categories}"
+                               th:href="@{${'/catalog/'+category.id}}"
+                               th:text="${category.title}">
+                                <span th:if="${category.id == 1}" class="badge badge-primary badge-pill">2</span>
+                                <span th:if="${category.id == 3}" class="badge badge-secondary">New</span>
+                            </a>
+                        </div>
+                    </li>
+                    <form class="form-inline" th:action="@{/search}">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </ul>
+                <div class="right_nav">
+                    <ul th:if="${#request.userPrincipal!=null}" >
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="oi oi-align-center"></span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" th:href="@{/logout}">
+                                    <span class="oi oi-account-logout"></span>Log out</a>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
             </div>
-            <h6 th:text="${userDto.userCard}"></h6>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <h1>Your account</h1>
+    <div class="row" th:if="${userDto != null}">
+        <div class="col-sm-4">
+            <div class="left-profile">
+                <img th:src="@{${'/resources/images/index/users/'+userDto.photoPath}}" alt="img" width="100%;"
+                     height="300px;">
+
+                <p>
+                    <span class="oi oi-wrench"></span> <a href="#">Settings</a>
+                </p>
+                <p>
+                    <span class="oi oi-eye"></span> <a href="#">Products that you reviewed recently</a>
+                </p>
+                <p>
+                    <span class="oi oi-cart"></span> <a href="#">Your cart</a>
+                </p>
+                <p>
+                    <span class="oi oi-thumb-up"></span> <a href="#">Liked products</a>
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="main-profile">
+                <h4>Wellcome!</h4>
+                <p>
+                    <span class="oi oi-person"></span>Username:
+                    <span th:text="${userDto.userName}"></span>
+                </p>
+                <p>
+                    <span class="oi oi-envelope-closed"></span>Email:
+                    <span th:text="${userDto.userEmail}"></span>
+                </p>
+                <p>
+                    <span class="oi oi-credit-card"></span>Cart number:
+                    <span th:text="${userDto.userCard}"></span>
+                </p>
+            </div>
         </div>
     </div>
 </div>
+<footer>
+    <div class="footer-middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <!--Column1-->
+                    <div class="footer-pad">
+                        <h4>Address</h4>
+                        <address>
+                            <ul class="list-unstyled">
+                                <li>
+                                    City Hall<br>
+                                    212 Street<br>
+                                    Lawoma<br>
+                                    735<br>
+                                </li>
+                                <li>
+                                    Phone: 0
+                                </li>
+                            </ul>
+                        </address>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!--Column1-->
+                    <div class="footer-pad">
+                        <h4>How to buy the product?</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Shipping</a></li>
+                            <li><a href="#">Payment</a></li>
+                            <li><a href="#">Conditions of return</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <!--Column1-->
+                    <div class="footer-pad">
+                        <h4>Contacts</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">About us</a></li>
+                            <li><a href="#">Technical support</a></li>
+                            <li>
+                                <div id="google_translate_element"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!--Footer Bottom-->
+                    <p class="text-xs-center">&copy; Copyright 2016 - Electronic Shop. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 </body>
 </html>

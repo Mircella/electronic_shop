@@ -58,7 +58,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" th:href="@{/}"><span class="oi oi-home"></span>Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -78,15 +78,24 @@
                     </form>
                 </ul>
                 <div class="right_nav">
-                    <ul>
+                    <ul th:if="${#request.userPrincipal==null}" >
                         <li>
-                            <a th:if="${#request.userPrincipal==null}" th:href="@{/login}"><span
-                                    class="oi oi-person"></span>Log in / Sign up</a>
+                            <a th:href="@{/login}"><span
+                                    class="oi oi-account-login"></span>Log in / Sign up</a>
                         </li>
-                        <li>
-                            <a th:if="${#request.userPrincipal!=null}" th:href="@{/logout}"><span
-                                    class="glyphicon glyphicon-log-out"></span>Logout</a>
-                        </li>
+                    </ul>
+                    <ul th:if="${#request.userPrincipal!=null}" >
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="oi oi-align-center"></span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" th:href="@{/user-page}">
+                                    <span class="oi oi-person"></span>My page</a>
+                                <a class="dropdown-item" th:href="@{/logout}">
+                                    <span class="oi oi-account-logout"></span>Log out</a>
+                            </div>
+                        </div>
                     </ul>
                 </div>
             </div>

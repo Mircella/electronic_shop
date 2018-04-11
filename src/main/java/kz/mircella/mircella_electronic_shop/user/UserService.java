@@ -20,6 +20,7 @@ public class UserService {
 
     public User getUserByName(String name) {
         User user = userRepository.findUserByUsername(name);
+        validateUser(user, name);
         return user;
     }
 

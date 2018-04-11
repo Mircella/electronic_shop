@@ -86,11 +86,6 @@ body {
     margin-bottom: 20px;
 }
 
-
-
-
-
-
 /* Filter element --------------*/
 
 .container1 {
@@ -212,6 +207,21 @@ body {
 /* End Filter list ---------------*/
 
 /* End Lower main -----------------*/
+
+/*-- Main -------------------------*/
+
+.main-center {
+    margin-bottom: 50px;
+}
+
+.main-center h1{
+    text-align: center;
+    margin-top: 20px;
+}
+
+.main-center h4{
+    margin-top: 20px;
+}
 
 
 /*----- Footer ------------------------*/

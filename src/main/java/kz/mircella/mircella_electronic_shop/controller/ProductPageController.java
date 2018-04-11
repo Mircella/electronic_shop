@@ -1,8 +1,8 @@
 package kz.mircella.mircella_electronic_shop.controller;
 
 import kz.mircella.mircella_electronic_shop.feedback.Feedback;
-import kz.mircella.mircella_electronic_shop.feedback.FeedbackDetails;
 import kz.mircella.mircella_electronic_shop.feedback.FeedbackService;
+import kz.mircella.mircella_electronic_shop.order.OrderService;
 import kz.mircella.mircella_electronic_shop.product.Product;
 import kz.mircella.mircella_electronic_shop.product.ProductService;
 import kz.mircella.mircella_electronic_shop.product_category.ProductCategory;
@@ -23,32 +23,42 @@ import java.util.List;
 public class ProductPageController {
 
     private FeedbackService feedbackService;
-    private UserService userService;
     private ProductService productService;
     private ProductCategoryService productCategoryService;
+    private OrderService orderService;
 
     @GetMapping(value = "/product/{id}")
     public String productPage(@PathVariable("id") String id, Model model) {
-        List<ProductCategory> productCategories = productCategoryService.getAllProductCategories();
         Product product = productService.getProductById(Long.parseLong(id));
-        List<Feedback> feedbacks = feedbackService.getFeedbacksByProduct(product);
-        model.addAttribute("product", product);
-        model.addAttribute("categories", productCategories);
-        model.addAttribute("feedbacks", feedbacks);
+        model.addAttribute("product", productService.getProductById(Long.parseLong(id)));
+        model.addAttribute("categories", productCategoryService.getAllProductCategories());
+        model.addAttribute("feedbacks", feedbackService.getFeedbacksByProduct(product));
         return "product";
     }
 
     @PostMapping(value = "/product/{id}")
-    public String feedbackPage(@PathVariable("id") String id, Model model, Feedback feedback, Principal principal) {
-        String name = principal != null ? principal.getName() : "Anonymous";
-        String text = feedback.getText();
-        FeedbackDetails feedbackDetails = feedbackService.createFeedbackDetails(name, text, Long.parseLong(id), null);
+    public String feedbackPage(@PathVariable("id") String id, Feedback feedback, Principal principal) {
+        feedbackService.createFeedbackDetails(principal != null ?
+                        principal.getName() :
+                        "Anonymous",
+                feedback.getText(),
+                Long.parseLong(id),
+                null);
         return "redirect:/product/" + id;
     }
 
-    @GetMapping(value = "/cart")
-    public String cartPage(Model model) {
-        model.addAttribute("review", "Review");
+    @GetMapping(value = "/cart/{id}")
+    public String cartPage(@PathVariable("id") String id, Principal principal, Model model) {
+        orderService.saveOrder(principal.getName(), id);
+        model.addAttribute("categories", productCategoryService.getAllProductCategories());
+        model.addAttribute("order", orderService.getOrder(principal.getName()));
+        return "cart";
+    }
+
+    @GetMapping(value = "/cart-remove/{title}")
+    public String cartRemovePage(@PathVariable("title") String title, Principal principal, Model model) {
+        model.addAttribute("categories", productCategoryService.getAllProductCategories());
+        model.addAttribute("order", orderService.getOrder(principal.getName()));
         return "cart";
     }
 

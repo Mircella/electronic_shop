@@ -22,7 +22,6 @@ public class User implements Serializable {
     private static final long serialVersionUID = -8457321766670856111L;
     @Id
     @Column(length = 11, nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 100)
@@ -37,7 +36,7 @@ public class User implements Serializable {
     @Column(nullable = false, length = 10, unique = true)
     private Long card;
 
-    @Column(nullable = false, length = 255, unique = true)
+    @Column(nullable = false)
     private String photoPath;
 
     @Column
