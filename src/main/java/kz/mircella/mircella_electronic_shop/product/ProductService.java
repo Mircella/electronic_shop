@@ -1,7 +1,6 @@
 package kz.mircella.mircella_electronic_shop.product;
 
 import kz.mircella.mircella_electronic_shop.exception.server_exception.NotFoundException;
-import kz.mircella.mircella_electronic_shop.feedback.Feedback;
 import kz.mircella.mircella_electronic_shop.product_category.ProductCategory;
 import kz.mircella.mircella_electronic_shop.product_category.ProductCategoryService;
 import lombok.AllArgsConstructor;
@@ -11,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,8 +23,6 @@ public class ProductService {
     public List<Product> getProductsWithLowPrice(int amount) {
         return productRepository.getProductsWithLowPrice(amount);
     }
-
-    //public List<Product> getExpensiveProducts(){}
 
     public Product getProductById(long id) {
         Product product = productRepository.getOne(id);
@@ -54,13 +50,13 @@ public class ProductService {
         return products == null ? Collections.emptyList() : products;
     }
 
-    public List<Product> getProductsByProductCategory(ProductCategory productCategory){
+    public List<Product> getProductsByProductCategory(ProductCategory productCategory) {
         List<Product> products = productRepository.getProductsByProductCategory(productCategory);
         return products == null ? Collections.emptyList() : products;
     }
 
-    public void validateProduct(Product product, long id){
-        if(product == null){
+    public void validateProduct(Product product, long id) {
+        if (product == null) {
             throw new NotFoundException("There is no product %d", id);
         }
         product.getFeedbacks();

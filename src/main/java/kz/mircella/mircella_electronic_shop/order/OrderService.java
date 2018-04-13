@@ -41,6 +41,10 @@ public class OrderService {
         return orderMapper.mapToOrderDetails(order);
     }
 
+    @Transactional
+    public void deleteOrder(String productTitle) {
+    }
+
     public Order findOrder(String username) {
         User user = userService.getUserByName(username);
         List<Order> orders = orderRepository.findOrdersByUser(user);

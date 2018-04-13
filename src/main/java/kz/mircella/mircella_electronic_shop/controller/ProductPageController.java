@@ -62,4 +62,11 @@ public class ProductPageController {
         return "cart";
     }
 
+    @GetMapping(value = "/buy")
+    public String cartBuyPage(Principal principal, Model model) {
+        model.addAttribute("categories", productCategoryService.getAllProductCategories());
+        model.addAttribute("order", orderService.getOrder(principal.getName()));
+        return "cart";
+    }
+
 }

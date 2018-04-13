@@ -2,12 +2,159 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Page for error</title>
+    <title th:text="#{site_title}"></title>
+    <link rel="icon" th:src="@{/resources/images/icon.jpg}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/resources/css/index.css}">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
+    <!-- jQuery library -->
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+    <!-- Latest compiled JavaScript -->
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+    <!-- Icons -->
+    <link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.css}"
+          rel="stylesheet">
+    <!-- Add icon library -->
+    <link rel="stylesheet"
+          th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+    <!-- Google fonts -->
+    <link th:href="@{https://fonts.googleapis.com/css?family=Roboto+Slab}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{resources/css/index_old.css}">
 </head>
 <body>
-<p th:text="${access}"></p>
-<h3 th:if="${message != null}" th:utext="${message}" style="color: red;"></h3>
-
-<div th:if="${userDto != null}" th:utext="${userDto.userName}"></div>
+<div class="logo container">
+    <div class="logo_center">
+        <span>Electronic</span><span class="red_logo">Shop</span>
+    </div>
+</div>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="nav_bar">
+            <a class="navbar-brand" th:href="@{/}">Electronic Shop</a>
+        </div>
+        <div class="nav_toggle">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            More
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/reviews}">Reviews</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/contacts}">Contacts</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/promotions}">Promotions</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item"
+                               th:each="category:${categories}"
+                               th:href="@{${'/catalog/'+category.id}}"
+                               th:text="${category.title}">
+                                <span th:if="${category.id == 1}" class="badge badge-primary badge-pill">2</span>
+                                <span th:if="${category.id == 3}" class="badge badge-secondary">New</span>
+                            </a>
+                        </div>
+                    </li>
+                    <form class="form-inline" th:action="@{/search}">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
+                </ul>
+                <div class="right_nav">
+                    <ul th:if="${#request.userPrincipal==null}">
+                        <li>
+                            <a th:href="@{/login}"><span
+                                    class="oi oi-account-login"></span>Log in / Sign up</a>
+                        </li>
+                    </ul>
+                    <ul th:if="${#request.userPrincipal!=null}">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="oi oi-align-center"></span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" th:href="@{/user-page}">
+                                    <span class="oi oi-person"></span>My page</a>
+                                <a class="dropdown-item" th:href="@{/logout}">
+                                    <span class="oi oi-account-logout"></span>Log out</a>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<div class="container">
+    <div class="main">
+        <h3 style="color: red;">Error page</h3>
+        <div class="row card-style">
+            <div class="col-sm-4 left-card">
+                <img th:src="@{/resources/images/error/error.jpg}" class="img-fluid" alt="img">
+            </div>
+            <div class="col-sm-8 right-card" th:if="${access!=null}">
+                <h4 th:text="${access}"></h4>
+                <p th:if="${principal!=null}">
+                    Access is denied for <span th:text="${principal.getUsername()}"></span>
+                </p>
+            </div>
+            <div class="col-sm-8 right-card">
+                <h4 th:if="${message != null}" th:utext="${message}" style="color: red;"></h4>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-3">
+                <ul class="list-unstyled">
+                    <li>How to buy the product?
+                    <li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Payment</a></li>
+                    <li><a href="#">Conditions of return</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-3">
+                <ul class="list-unstyled">
+                    <li>Contacts
+                    <li>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Technical support</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-xs-4">
+                <p class="text-muted pull-right">© 2018 Electronic shop. All rights reserved</p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

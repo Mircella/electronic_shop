@@ -72,16 +72,12 @@ class UserPageController {
 
     @GetMapping(value = "/denied")
     String denyAccess(Model model, Principal principal) {
-        org.springframework.security.core.userdetails.User loginedUser;
+        List<ProductCategory> productCategories = productCategoryService.getAllProductCategories();
         if (principal != null) {
-            loginedUser = (org.springframework.security.core.userdetails.User)
-                    ((Authentication) principal).getPrincipal();
-            String username = loginedUser.getUsername();
-            UserDto userDto = WebUtil.getSecurityUserInfo(username);
-            model.addAttribute("userDto", userDto);
-            model.addAttribute("userMessage", "You have no access to this page");
+            model.addAttribute("message", "You have no access to this page");
         }
         model.addAttribute("access", "Access is denied");
+        model.addAttribute("categories", productCategories);
         return "error";
     }
 }

@@ -84,15 +84,16 @@
                     </li>
                 </ul>
                 <div class="right_nav">
-                    <ul th:if="${#request.userPrincipal==null}" >
+                    <ul th:if="${#request.userPrincipal==null}">
                         <li>
                             <a th:href="@{/login}"><span
                                     class="oi oi-account-login"></span>Log in / Sign up</a>
                         </li>
                     </ul>
-                    <ul th:if="${#request.userPrincipal!=null}" >
+                    <ul th:if="${#request.userPrincipal!=null}">
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="oi oi-align-center"></span>
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -113,31 +114,20 @@
     <div class="row">
         <div class="col-md-12 lower-main">
             <form method="post" action="" th:action="@{/search}">
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for books.." name="title">
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for products.." name="title">
                 <div id="myBtnContainer">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </div>
             </form>
             <hr style="width: 5px">
-            <!--<div>-->
-                <!--<div class="img">-->
-                    <!--<picture>-->
-                        <!--<source th:src="@{${'/resources/images/index/products/'+product.path}}">-->
-                    <!--</picture>-->
-                <!--</div>-->
-                <!---->
-            <!--</div>-->
-            <ul id="myUL" th:each="product:${products}">
-                <li>
-                    <a href="#">
-                        <img th:src="@{${'/resources/images/index/products/'+product.path}}" media="(max-width: 500px)" alt="product">
-                    </a>
+            <ul id="myUL" th:if="${products!=null}">
+                <li th:each="product:${products}">
+                    <a th:href="@{${'/product/'+product.id}}">
+                        <img th:src="@{${'/resources/images/index/products/'+product.path}}" alt="img"></a>
+                    <p th:utext="${product.title}"></p>
                     <div class="description">
-                        <div class="des">
-                            <h5 th:text="${product.title}"></h5>
-                        </div>
                         <div class="price">
-                            <h6 th:text="${product.price}"></h6>
+                            <h5 th:utext="${product.price}"></h5>
                         </div>
                     </div>
                 </li>

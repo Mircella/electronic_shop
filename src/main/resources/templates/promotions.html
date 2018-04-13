@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title th:text="#{site_title}"></title>
+    <link rel="icon" th:src="@{/resources/images/icon.jpg}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/resources/css/index.css}">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css}">
     <!-- jQuery library -->
@@ -21,97 +23,140 @@
     <link rel="stylesheet" th:href="@{resources/css/index_old.css}">
 </head>
 <body>
+<div class="logo container">
+    <div class="logo_center">
+        <span>Electronic</span><span class="red_logo">Shop</span>
+    </div>
+</div>
 <header>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container-fluid">
-            <div class="navbar-header ">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" th:href="@{/}" th:text="#{site_title}"></a>
-            </div>
-
-            <form class="navbar-form navbar-left" method="post" action="" th:action="@{/search}">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="title">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default">
-                            <i class="glyphicon glyphicon-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-            <div class="collapse navbar-collapse" id="myNavbar">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a th:href="@{/}">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" roleEnum="button"
-                           aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a th:href="@{/promotions}">Our promotions</a></li>
-                            <li><a th:href="@{/reviews}">Reviews</a></li>
-                        </ul>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="nav_bar">
+            <a class="navbar-brand" th:href="@{/}">Electronic Shop</a>
+        </div>
+        <div class="nav_toggle">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="container">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
                     </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            More
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" th:href="@{/reviews}">Reviews</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/contacts}">Contacts</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" th:href="@{/promotions}">Promotions</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categories
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item"
+                               th:each="category:${categories}"
+                               th:href="@{${'/catalog/'+category.id}}"
+                               th:text="${category.title}">
+                                <span th:if="${category.id == 1}" class="badge badge-primary badge-pill">2</span>
+                                <span th:if="${category.id == 3}" class="badge badge-secondary">New</span>
+                            </a>
+                        </div>
+                    </li>
+                    <form class="form-inline" th:action="@{/search}">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                    </form>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a th:href="@{/sign_up}"><span class="glyphicon glyphicon-user"></span>Sign Up</a></li>
-                    <li><a th:if="${#request.userPrincipal!=null}" th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span>Logout</a></li>
-                    <li><a th:if="${#request.userPrincipal==null}" th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span>Login</a></li>
-                </ul>
+                <div class="right_nav">
+                    <ul th:if="${#request.userPrincipal==null}">
+                        <li>
+                            <a th:href="@{/login}"><span
+                                    class="oi oi-account-login"></span>Log in / Sign up</a>
+                        </li>
+                    </ul>
+                    <ul th:if="${#request.userPrincipal!=null}">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="oi oi-align-center"></span>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" th:href="@{/user-page}">
+                                    <span class="oi oi-person"></span>My page</a>
+                                <a class="dropdown-item" th:href="@{/logout}">
+                                    <span class="oi oi-account-logout"></span>Log out</a>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
 </header>
-<div class="container demo">
-    <ul class="breadcrumb">
-        <li><a th:href="@{/}">Home</a></li>
-        <li class="active">Our promotions</li>
-    </ul>
-    <div class="main clearfix">
-        <div class="img">
-            <picture>
-                <source th:src="@{/resources/images/promotions/promotion1.jpg}" media="(max-width: 500px)">
-                <img th:src="@{/resources/images/promotions/promotion1.jpg}" alt="product_picture">
-            </picture>
-        </div>
-        <div class="description">
-            <div class="des">
-                <p th:text="${promotion}"></p>
-                <!--<h1 th:utext="${product.title}"></h1>-->
-                <!--<p>Status:-->
-                    <!--<span th:if="${product.count>0}">In stock</span>-->
-                    <!--<span th:if="${product.count<=0}">No stock</span>-->
-                <!--</p>-->
+<div class="container">
+    <div class="main">
+        <h3>Promotions</h3>
+        <div class="row card-style">
+            <div class="col-sm-4 left-card">
+                <img th:src="@{/resources/images/promotions/promotion1.jpg}" class="img-fluid" alt="img">
             </div>
-            <!--<div class="price" th:if="${product!=null}">-->
-                <!--<h2>Our price: <span th:text="${product.price}"></span></h2>-->
-                <!--<a th:href="@{/cart}"><img th:src="@{/resources/images/product/addtocart.png}" alt="add cart"></a>-->
-            <!--</div>-->
-        </div>
-    </div>
-    <div class="main clearfix">
-        <div class="img">
-            <picture>
-                <source th:src="@{/resources/images/promotions/promotion2.jpg}" media="(max-width: 500px)">
-                <img th:src="@{/resources/images/promotions/promotion2.jpg}" alt="product_picture">
-            </picture>
-        </div>
-        <div class="description">
-            <div class="des">
-                <p th:text="${promotion}"></p>
-                <!--<h1 th:utext="${product.title}"></h1>-->
-                <!--<p>Status:-->
-                <!--<span th:if="${product.count>0}">In stock</span>-->
-                <!--<span th:if="${product.count<=0}">No stock</span>-->
-                <!--</p>-->
+            <div class="col-sm-8 right-card">
+                <h4>Lorem Ipsum</h4>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book.
+                </p>
             </div>
-            <!--<div class="price" th:if="${product!=null}">-->
-            <!--<h2>Our price: <span th:text="${product.price}"></span></h2>-->
-            <!--<a th:href="@{/cart}"><img th:src="@{/resources/images/product/addtocart.png}" alt="add cart"></a>-->
-            <!--</div>-->
+        </div>
+        <div class="row card-style">
+            <div class="col-sm-4 left-card">
+                <img th:src="@{/resources/images/promotions/promotion2.jpg}" class="img-fluid" alt="img">
+            </div>
+            <div class="col-sm-8 right-card">
+                <h4>Lorem Ipsum</h4>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book.
+                </p>
+            </div>
+        </div>
+        <div class="row card-style">
+            <div class="col-sm-4 left-card">
+                <img th:src="@{/resources/images/promotions/promotion3.jpg}" class="img-fluid" alt="img">
+            </div>
+            <div class="col-sm-8 right-card">
+                <h4>Lorem Ipsum</h4>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book.
+                </p>
+            </div>
+        </div>
+        <div class="row card-style">
+            <div class="col-sm-4 left-card">
+                <img th:src="@{/resources/images/promotions/promotion4.jpg}" class="img-fluid" alt="img">
+            </div>
+            <div class="col-sm-8 right-card">
+                <h4>Lorem Ipsum</h4>
+                <p>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type
+                    and scrambled it to make a type specimen book.
+                </p>
+            </div>
         </div>
     </div>
 </div>
